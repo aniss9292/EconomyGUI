@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EconomyGUI — Docs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0f0d;
+    --panel:#121815;
+    --panel2:#161d19;
+    --border:#22302a;
+    --border-strong:#334539;
+    --text:#dfe8e3;
+    --muted:#728b7d;
+    --dim:#4d6157;
+    --accent:#7fd68a;
+    --accent-dim:#4f8a58;
+    --gold:#e0a458;
+    --danger:#e2685c;
+    --mono:'IBM Plex Mono', ui-monospace, monospace;
+    --sans:'Inter', -apple-system, sans-serif;
+    --arsans:'Noto Kufi Arabic', 'Segoe UI', Tahoma, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{
+    height:100%; background:var(--bg); color:var(--text);
+    font-family:var(--sans); overflow:hidden;
+  }
+  ::selection{background:var(--accent); color:#06110a;}
+
+  body[dir="rtl"]{font-family:var(--arsans);}
+  body[dir="rtl"] code, body[dir="rtl"] .mono, body[dir="rtl"] .eyebrow, body[dir="rtl"] .pageno{
+    font-family:var(--mono); direction:ltr; unicode-bidi:embed; display:inline-block;
+  }
+
+  code{
+    font-family:var(--mono); background:#0f1512; border:1px solid var(--border);
+    padding:1px 7px; border-radius:4px; font-size:0.85em; color:var(--accent);
+  }
+  pre{
+    font-family:var(--mono); background:#0e1310; border:1px solid var(--border);
+    border-radius:8px; padding:16px 18px; overflow-x:auto; font-size:13px;
+    line-height:1.65; color:#c3d4cb; direction:ltr; text-align:left;
+  }
+  pre code{background:none; border:none; padding:0; color:inherit; font-size:1em;}
+  .tok-k{color:var(--gold);}
+  .tok-s{color:#8fbfd6;}
+  .tok-n{color:var(--accent);}
+  .tok-c{color:var(--dim); font-style:italic;}
+
+  a{color:var(--accent);}
+
+  /* ===== Top chrome ===== */
+  .topbar{
+    position:fixed; top:0; left:0; right:0; z-index:200; height:56px;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 22px; background:linear-gradient(180deg, rgba(11,15,13,0.97), rgba(11,15,13,0.85));
+    border-bottom:1px solid var(--border);
+  }
+  .brand{
+    font-family:var(--mono); font-weight:600; font-size:14px; letter-spacing:0.02em;
+    color:var(--text); display:flex; align-items:center; gap:10px;
+  }
+  .brand .dot{width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 8px var(--accent);}
+  .topbar-right{display:flex; align-items:center; gap:16px;}
+  .progress-label{
+    font-family:var(--mono); font-size:12px; color:var(--muted);
+  }
+  .progress-label b{color:var(--accent); font-weight:600;}
+  .lang-switch{
+    display:flex; background:var(--panel2); border:1px solid var(--border); border-radius:6px; overflow:hidden;
+  }
+  .lang-switch button{
+    font-family:var(--mono); background:none; border:none; color:var(--muted);
+    padding:6px 14px; font-size:12px; font-weight:500; cursor:pointer; letter-spacing:0.03em;
+  }
+  .lang-switch button.active{background:var(--accent); color:#06110a;}
+
+  /* ===== Pager track ===== */
+  .pager{
+    position:fixed; top:56px; left:0; right:0; bottom:0;
+    overflow-y:scroll; scroll-snap-type:y mandatory;
+    scrollbar-width:none;
+  }
+  .pager::-webkit-scrollbar{display:none;}
+  .page{
+    height:calc(100vh - 56px); width:100%; scroll-snap-align:start;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:40px 24px; position:relative;
+  }
+  .page-inner{width:100%; max-width:760px;}
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; color:var(--accent);
+    letter-spacing:0.04em; margin-bottom:14px; display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow::before{content:'#'; color:var(--dim);}
+  h1{
+    font-family:var(--mono); font-weight:600; font-size:2.4rem; line-height:1.15;
+    color:#fff; margin-bottom:14px; letter-spacing:-0.01em;
+  }
+  [dir="rtl"] h1{font-family:var(--arsans); font-weight:700;}
+  h2{
+    font-family:var(--mono); font-weight:600; font-size:1.7rem; color:#fff; margin-bottom:16px;
+  }
+  [dir="rtl"] h2{font-family:var(--arsans); font-weight:700;}
+  h3{
+    font-family:var(--mono); font-size:1rem; font-weight:600; color:var(--gold); margin:22px 0 10px;
+  }
+  [dir="rtl"] h3{font-family:var(--arsans); font-weight:700;}
+  p{font-size:15px; line-height:1.75; color:#c3d0c9; margin-bottom:12px;}
+  p b, li b{color:var(--text); font-weight:600;}
+  .lede{font-size:17px; color:#c3d0c9; line-height:1.7; max-width:560px;}
+
+  ul, ol{padding-left:20px; margin-bottom:12px;}
+  [dir="rtl"] ul, [dir="rtl"] ol{padding-left:0; padding-right:20px;}
+  li{font-size:15px; line-height:1.8; color:#c3d0c9; margin-bottom:6px;}
+
+  .badge-row{display:flex; gap:8px; margin-bottom:22px; flex-wrap:wrap;}
+  .badge{
+    font-family:var(--mono); font-size:11px; color:var(--muted); border:1px solid var(--border);
+    padding:4px 10px; border-radius:20px; background:var(--panel);
+  }
+
+  /* Block-id icon strip (signature element) */
+  .blockstrip{display:flex; gap:6px; margin:26px 0 6px; flex-wrap:wrap;}
+  .blockchip{
+    width:34px; height:34px; border-radius:6px; border:1px solid var(--border-strong);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-size:10px; color:var(--dim); background:var(--panel2);
+  }
+
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;}
+  .card{
+    background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:18px 20px;
+  }
+  .card .k{font-family:var(--mono); font-size:12px; color:var(--gold); margin-bottom:8px; display:block;}
+  .card p{font-size:14px; margin:0; color:var(--muted);}
+
+  table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+  th,td{padding:9px 12px; border-bottom:1px solid var(--border); text-align:left; vertical-align:top;}
+  [dir="rtl"] th, [dir="rtl"] td{text-align:right;}
+  th{font-family:var(--mono); color:var(--gold); font-weight:500; font-size:12px; text-transform:uppercase; letter-spacing:0.03em;}
+  td{color:#c3d0c9;}
+  td code{white-space:nowrap;}
+
+  .note{
+    border-inline-start:2px solid var(--accent); background:var(--panel); padding:12px 16px;
+    border-radius:0 8px 8px 0; font-size:14px; color:#b6c7bd; margin:16px 0;
+  }
+  [dir="rtl"] .note{border-radius:8px 0 0 8px;}
+  .note.warn{border-color:var(--danger);}
+
+  .center{text-align:center;}
+  .center .lede{margin-left:auto; margin-right:auto;}
+
+  footer-line{display:block; font-family:var(--mono); font-size:12px; color:var(--dim); margin-top:40px;}
+
+  /* ===== Side nav dots ===== */
+  .navdots{
+    position:fixed; top:50%; right:22px; transform:translateY(-50%); z-index:150;
+    display:flex; flex-direction:column; gap:12px;
+  }
+  [dir="rtl"] .navdots{right:auto; left:22px;}
+  .navdots button{
+    width:8px; height:8px; border-radius:50%; border:1px solid var(--border-strong);
+    background:transparent; cursor:pointer; padding:0; position:relative;
+  }
+  .navdots button.active{background:var(--accent); border-color:var(--accent); box-shadow:0 0 6px var(--accent);}
+  .navdots .tip{
+    position:absolute; right:16px; top:50%; transform:translateY(-50%);
+    font-family:var(--mono); font-size:11px; color:var(--muted); white-space:nowrap;
+    opacity:0; pointer-events:none; transition:opacity 0.15s; background:var(--panel);
+    border:1px solid var(--border); padding:3px 8px; border-radius:4px;
+  }
+  [dir="rtl"] .navdots .tip{right:auto; left:16px;}
+  .navdots button:hover .tip{opacity:1;}
+
+  /* ===== Bottom scroll hint ===== */
+  .scrollhint{
+    position:absolute; bottom:26px; left:50%; transform:translateX(-50%);
+    font-family:var(--mono); font-size:11px; color:var(--dim);
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+  }
+  .scrollhint .chev{animation:bob 1.6s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0);} 50%{transform:translateY(4px);}}
+
+  /* ===== Section-specific chip colors ===== */
+  .g1{color:var(--muted);} 
+
+  @media(max-width:720px){
+    h1{font-size:1.7rem;}
+    h2{font-size:1.3rem;}
+    .grid2{grid-template-columns:1fr;}
+    .navdots{display:none;}
+    .page{padding:90px 20px 40px;}
+  }
+</style>
+</head>
+<body dir="ltr">
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span>EconomyGUI<span style="color:var(--dim); font-weight:400;"> / docs</span></div>
+  <div class="topbar-right">
+    <span class="progress-label"><b id="pnum">01</b> / <span id="ptotal">14</span></span>
+    <div class="lang-switch">
+      <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+      <button id="btn-ar" onclick="setLang('ar')">AR</button>
+    </div>
+  </div>
+</div>
+
+<div class="navdots" id="navdots"></div>
+
+<!-- ================= ENGLISH ================= -->
+<div class="pager" id="pager-en">
+
+  <section class="page" id="en-0">
+    <div class="page-inner">
+      <div class="badge-row">
+        <span class="badge">v1.0.0</span><span class="badge">API 2.0.0</span><span class="badge">MCPE 0.14.3 / 0.15.x</span><span class="badge">MIT</span>
+      </div>
+      <div class="eyebrow">plugin.yml</div>
+      <h1>EconomyGUI</h1>
+      <p class="lede">A shop and sell GUI for legacy PocketMine-MP servers. Double-chest interface, paginated categories, sell hand / all / undo, and optional integration with SmartSpawner and AzCustomEnchant.</p>
+      <div class="blockstrip">
+        <div class="blockchip">5</div><div class="blockchip">1:0</div><div class="blockchip">52</div>
+        <div class="blockchip">403</div><div class="blockchip">54</div><div class="blockchip">2</div>
+        <div class="blockchip">4</div><div class="blockchip">17</div>
+      </div>
+    </div>
+    <div class="scrollhint">scroll<div class="chev">⌄</div></div>
+  </section>
+
+  <section class="page" id="en-1">
+    <div class="page-inner">
+      <div class="eyebrow">install</div>
+      <h2>Installation</h2>
+      <ol>
+        <li>Place the <code>EconomyGUI</code> folder in <code>plugins/</code></li>
+        <li>Restart the server</li>
+        <li>Three files auto-generate: <code>config.yml</code>, <code>shop.yml</code>, <code>sell.yml</code></li>
+        <li>Edit prices and categories as needed</li>
+        <li>Run <code>/shopreload</code> to apply changes without restarting</li>
+      </ol>
+      <div class="note">Requires <code>EconomyAPI</code>. <code>SmartSpawner</code> and <code>AzCustomEnchant</code> are optional soft-dependencies — their shop categories hide automatically if either is missing.</div>
+    </div>
+  </section>
+
+  <section class="page" id="en-2">
+    <div class="page-inner">
+      <div class="eyebrow">player guide</div>
+      <h2>Commands</h2>
+      <table>
+        <tr><th>Command</th><th>Does</th></tr>
+        <tr><td><code>/shop</code></td><td>Opens the shop GUI</td></tr>
+        <tr><td><code>/sell</code></td><td>Opens the sell chest GUI</td></tr>
+        <tr><td><code>/sell hand</code></td><td>Sells the item in your hand</td></tr>
+        <tr><td><code>/sell all</code></td><td>Sells every sellable item in your inventory</td></tr>
+        <tr><td><code>/sell undo</code></td><td>Reverses your last sell, within 5 minutes</td></tr>
+        <tr><td><code>/shopbalance</code></td><td>Shows your money balance</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="page" id="en-3">
+    <div class="page-inner">
+      <div class="eyebrow">player guide</div>
+      <h2>Using the shop</h2>
+      <p>Open <code>/shop</code> to see categories. Click a category to browse items, click an item to open the buy screen, then pick 1x, 10x, or 64x.</p>
+      <p>The <b>back</b> button sits at slot 45. Yellow and blue wool buttons flip between pages.</p>
+      <div class="grid2">
+        <div class="card"><span class="k">01 · browse</span><p>Pick a category, scroll pages with the wool buttons.</p></div>
+        <div class="card"><span class="k">02 · buy</span><p>Click an item, choose a quantity, confirm.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="en-4">
+    <div class="page-inner">
+      <div class="eyebrow">player guide</div>
+      <h2>Selling items</h2>
+      <p><b>Sell chest</b> — open <code>/sell</code>, drop items inside, close the chest. Sellable items are sold instantly, the rest come back to you.</p>
+      <p><b>Sell hand</b> — <code>/sell hand</code> sells whatever you're holding.</p>
+      <p><b>Sell all</b> — <code>/sell all</code> scans your whole inventory and sells everything sellable at once.</p>
+      <p><b>Undo</b> — <code>/sell undo</code> reverses your last sell if you still have enough money and space, within the server's time limit.</p>
+    </div>
+  </section>
+
+  <section class="page" id="en-5">
+    <div class="page-inner">
+      <div class="eyebrow">config.yml</div>
+      <h2>Server configuration</h2>
+      <p>Controls GUI titles, currency symbol, cooldowns, sounds, logging, undo time, and buy-button layout.</p>
+      <pre><code><span class="tok-k">shop-title:</span> <span class="tok-s">"§l§6» §r§eShop §l§6«"</span>
+<span class="tok-k">sell-title:</span> <span class="tok-s">"§l§2» §r§aSell Chest §l§2«"</span>
+<span class="tok-k">currency-symbol:</span> <span class="tok-s">"$"</span>
+<span class="tok-k">purchase-cooldown:</span> 0
+<span class="tok-k">log-transactions:</span> true
+<span class="tok-k">undo-time-limit:</span> 300
+
+<span class="tok-k">sounds:</span>
+  <span class="tok-k">enabled:</span> true
+  <span class="tok-k">on-purchase:</span> <span class="tok-s">"random.orb"</span>
+  <span class="tok-k">on-sell:</span> <span class="tok-s">"random.orb"</span>
+  <span class="tok-k">on-error:</span> <span class="tok-s">"mob.villager.no"</span></code></pre>
+      <p>Messages support placeholders: <code>{amount}</code> <code>{item}</code> <code>{symbol}</code> <code>{price}</code> <code>{balance}</code> <code>{category}</code>.</p>
+    </div>
+  </section>
+
+  <section class="page" id="en-6">
+    <div class="page-inner">
+      <div class="eyebrow">shop.yml</div>
+      <h2>Categories and items</h2>
+      <p>Ships with 16 default categories — blocks, wood, ores, food, tools, spawners, enchants, and more.</p>
+      <pre><code><span class="tok-k">categories:</span>
+  <span class="tok-k">block_building:</span>
+    <span class="tok-k">name:</span> <span class="tok-s">§r§eBuilding Blocks</span>
+    <span class="tok-k">icon:</span> 5
+    <span class="tok-k">items:</span>
+      - <span class="tok-k">id:</span> 1
+        <span class="tok-k">meta:</span> 0
+        <span class="tok-k">name:</span> <span class="tok-s">§r§eStone</span>
+        <span class="tok-k">price:</span> 30
+        <span class="tok-k">amount:</span> 1
+        <span class="tok-k">sell:</span> 8</code></pre>
+    </div>
+  </section>
+
+  <section class="page" id="en-7">
+    <div class="page-inner">
+      <div class="eyebrow">shop.yml</div>
+      <h2>Optional categories</h2>
+      <p><b>Spawners</b> — needs <code>SmartSpawner</code>:</p>
+      <pre><code><span class="tok-k">spawnerz:</span>
+  <span class="tok-k">spawner_types:</span>
+    <span class="tok-k">iron_golem:</span>
+      <span class="tok-k">items:</span>
+        - <span class="tok-k">id:</span> 52
+          <span class="tok-k">price:</span> 400000
+          <span class="tok-k">spawner_type:</span> iron_golem
+          <span class="tok-k">spawner_tier:</span> basic</code></pre>
+      <p><b>Custom enchants</b> — needs <code>AzCustomEnchant</code>:</p>
+      <pre><code><span class="tok-k">custom_enchants:</span>
+  <span class="tok-k">items:</span>
+    - <span class="tok-k">id:</span> 403
+      <span class="tok-k">name:</span> <span class="tok-s">§r§6Excavator Book</span>
+      <span class="tok-k">price:</span> 250000
+      <span class="tok-k">enchant_key:</span> excavator</code></pre>
+      <div class="note">Both categories hide from <code>/shop</code> automatically when their plugin isn't installed.</div>
+    </div>
+  </section>
+
+  <section class="page" id="en-8">
+    <div class="page-inner">
+      <div class="eyebrow">sell.yml</div>
+      <h2>Sell list</h2>
+      <p>Same structure as <code>shop.yml</code>. Prices here represent what the player receives when selling — usually lower than the buy price.</p>
+    </div>
+  </section>
+
+  <section class="page" id="en-9">
+    <div class="page-inner">
+      <div class="eyebrow">admin commands</div>
+      <h2>Managing the shop</h2>
+      <table>
+        <tr><th>Command</th><th>Does</th></tr>
+        <tr><td><code>/shopgui-add &lt;id:meta&gt; &lt;price&gt; &lt;amount&gt; [cat] [sell]</code></td><td>Adds a shop item</td></tr>
+        <tr><td><code>/shopgui-remove &lt;id:meta&gt; [cat]</code></td><td>Removes a shop item</td></tr>
+        <tr><td><code>/shopgui-addcat &lt;key&gt; &lt;icon&gt; &lt;name&gt;</code></td><td>Creates a category</td></tr>
+        <tr><td><code>/shopgui-removecat &lt;key&gt;</code></td><td>Deletes a category</td></tr>
+        <tr><td><code>/shopgui-listcat</code></td><td>Lists categories</td></tr>
+        <tr><td><code>/sellgui-*</code></td><td>Same operations for the sell list</td></tr>
+        <tr><td><code>/shopreload</code></td><td>Reloads all config files</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="page" id="en-10">
+    <div class="page-inner">
+      <div class="eyebrow">integrations</div>
+      <h2>SmartSpawner & AzCustomEnchant</h2>
+      <div class="grid2">
+        <div class="card">
+          <span class="k">smartspawner</span>
+          <p>Shop entries with <code>spawner_type</code> + <code>spawner_tier</code> call <code>giveSpawnerItem()</code> to hand out a real, correctly-tagged spawner.</p>
+        </div>
+        <div class="card">
+          <span class="k">azcustomenchant</span>
+          <p>Shop entries with <code>enchant_key</code> call <code>createEnchantBookItem()</code> to produce a properly tagged enchant book.</p>
+        </div>
+      </div>
+      <p>Both are soft-dependencies — the plugin loads fine without them, and their categories simply stay hidden.</p>
+    </div>
+  </section>
+
+  <section class="page" id="en-11">
+    <div class="page-inner">
+      <div class="eyebrow">anti-dupe</div>
+      <h2>How exploits are blocked</h2>
+      <ol>
+        <li><b>NBT marker</b> — every GUI item is tagged <code>economygui_menu_item = 1</code></li>
+        <li><b>Transaction cancellation</b> — clicks inside the GUI are menu actions, never real inventory moves</li>
+        <li><b>Multi-event sweep</b> — tagged items are stripped on transaction, close, hotbar switch, drop, interact, and quit</li>
+        <li><b>Real item display</b> — items look exactly like what the player receives, safely</li>
+      </ol>
+      <div class="note warn">On MCPE 0.14.3/0.15.x, client-side prediction can flash a tagged item for a single tick before removal — expected and harmless.</div>
+    </div>
+  </section>
+
+  <section class="page" id="en-12">
+    <div class="page-inner">
+      <div class="eyebrow">architecture</div>
+      <h2>Under the hood</h2>
+      <pre><code>EconomyGUI/
+├── EconomyGUI.php          <span class="tok-c"># main class: commands, events, GUI logic</span>
+├── gui/
+│   ├── BaseGUI.php         <span class="tok-c"># fake-chest + navigation</span>
+│   ├── FakeHolder.php      <span class="tok-c"># virtual InventoryHolder</span>
+│   ├── OpenContainerTask.php <span class="tok-c"># delayed open (2-tick)</span>
+│   ├── ShopGUI.php
+│   └── SellChestGUI.php
+└── manager/
+    └── ConfigManager.php   <span class="tok-c"># config.yml / shop.yml / sell.yml</span></code></pre>
+      <p>The double chest is a fake block: two chest blocks are sent to the client, linked via <code>pairx/pairy/pairz</code> NBT, opened after a 2-tick delay, then restored on close.</p>
+    </div>
+  </section>
+
+  <section class="page" id="en-13">
+    <div class="page-inner">
+      <div class="eyebrow">troubleshooting</div>
+      <h2>Common issues</h2>
+      <table>
+        <tr><th>Issue</th><th>Fix</th></tr>
+        <tr><td>"EconomyAPI not found!"</td><td>Install EconomyAPI — required for all money operations</td></tr>
+        <tr><td>Spawnerz / enchants category missing</td><td>Install SmartSpawner / AzCustomEnchant, or remove the category from <code>shop.yml</code></td></tr>
+        <tr><td>GUI opens then closes instantly</td><td>Known on 0.14.3/0.15.x — avoid opening while moving</td></tr>
+        <tr><td>Item flashes in hotbar</td><td>Anti-dupe sweep in action — harmless</td></tr>
+        <tr><td>Config changes not applying</td><td>Run <code>/shopreload</code></td></tr>
+      </table>
+      <footer-line>EconomyGUI · by Aniss · MIT License</footer-line>
+    </div>
+  </section>
+
+</div>
+
+<!-- ================= ARABIC ================= -->
+<div class="pager" id="pager-ar" style="display:none;">
+
+  <section class="page" id="ar-0" dir="rtl">
+    <div class="page-inner">
+      <div class="badge-row">
+        <span class="badge">v1.0.0</span><span class="badge">API 2.0.0</span><span class="badge">MCPE 0.14.3 / 0.15.x</span><span class="badge">MIT</span>
+      </div>
+      <div class="eyebrow">plugin.yml</div>
+      <h1>EconomyGUI</h1>
+      <p class="lede">إضافة متجر وبيع لسيرفرات PocketMine-MP القديمة. واجهة صندوق مزدوج، تصنيفات مقسّمة لصفحات، بيع سريع / كامل / تراجع، وتكامل اختياري مع SmartSpawner و AzCustomEnchant.</p>
+      <div class="blockstrip">
+        <div class="blockchip">5</div><div class="blockchip">1:0</div><div class="blockchip">52</div>
+        <div class="blockchip">403</div><div class="blockchip">54</div><div class="blockchip">2</div>
+        <div class="blockchip">4</div><div class="blockchip">17</div>
+      </div>
+    </div>
+    <div class="scrollhint">مرر<div class="chev">⌄</div></div>
+  </section>
+
+  <section class="page" id="ar-1" dir="rtl">
+    <div class="page-inner">
+      <div class="eyebrow">install</div>
+      <h2>التثبيت</h2>
+      <ol>
+        <li>ضع مجلد <code>EconomyGUI</code> داخل <code>plugins/</code></li>
+        <li>أعد تشغيل السيرفر</li>
+        <li>تتولّد 3 ملفات تلقائياً: <code>config.yml</code>، <code>shop.yml</code>، <code>sell.yml</code></li>
+        <li>عدّل الأسعار والتصنيفات حسب حاجتك</li>
+        <li>استخدم <code>/shopreload</code> لتطبيق التغييرات بدون إعادة تشغيل</li>
+      </ol>
+      <div class="note">يتطلب <code>EconomyAPI</code>. إضافتا <code>SmartSpawner</code> و <code>AzCustomEnchant</code> اختياريتان — تصنيفاتهما تختفي تلقائياً إذا كانت الإضافة غير موجودة.</div>
+    </div>
+  </section>
+
+  <section class="page" id="ar-2" dir="rtl">
+    <div class="page-inner">
+      <div class="eyebrow">player guide</div>
+      <h2>الأوامر</h2>
+      <table>
+        <tr><th>الأمر</th><th>الوظيفة</th></tr>
+        <tr><td><code>/shop</code></td><td>يفتح واجهة المتجر</td></tr>
+        <tr><td><code>/sell</code></td><td>يفتح صندوق البيع</td></tr>
+        <tr><td><code>/sell hand</code></td><td>يبيع العنصر الذي بيدك</td></tr>
+        <tr><td><code>/sell all</code></td><td>يبيع كل العناصر القابلة للبيع في الإنفنتوري</td></tr>
+        <tr><td><code>/sell undo</code></td><td>يتراجع عن آخر بيع، خلال 5 دقائق</td></tr>
+        <tr><td><code>/shopbalance</code></td><td>يعرض رصيدك من المال</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="page" id="ar-3" dir="rtl">
+    <div class="page-inner">
+      <div class="eyebrow">player guide</div>
+      <h2>استخدام المتجر</h2>
+      <p>افتح <code>/shop</code> لرؤية التصنيفات. اضغط على تصنيف لتصفح عناصره، ثم اضغط عنصر لفتح شاشة الشراء واختر 1x أو 10x أو 64x.</p>
+      <p>زر <b>الرجوع</b> في السلوت 45. أزرار الصوف الأصفر والأزرق تنقلك بين الصفحات.</p>
+      <div class="grid2">
+        <div class="card"><span class="k">01 · تصفح</span><p>اختر تصنيفاً، تنقّل بين الصفحات بأزرار الصوف.</p></div>
+        <div class="card"><span class="k">02 · شراء</span><p>اضغط عنصراً، اختر الكمية، أكّد.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="ar-4" dir="rtl">
+    <div class="page-inner">
+      <div class="eyebrow">player guide</div>
+      <h2>بيع العناصر</h2>
+      <p><b>صندوق البيع</b> — افتح <code>/sell</code>، ضع العناصر بداخله، أغلق الصندوق. القابلة للبيع تُباع فوراً، والباقي يُعاد لك.</p>
+      <p><b>بيع سريع</b> — <code>/sell hand</code> يبيع ما بيدك مباشرة.</p>
+      <p><b>بيع الكل</b> — <code>/sell all</code> يفحص كامل الإنفنتوري ويبيع كل شيء قابل للبيع دفعة واحدة.</p>
+      <p><b>تراجع</b> — <code>/sell undo</code> يرجّع آخر عملية بيع بشرط توفر المال والمساحة، وضمن الوقت المحدد من السيرفر.</p>
+    </div>
+  </section>
+
+  <section class="page" id="ar-5" dir="rtl">
+    <div class="page-inner">
+      <div class="eyebrow">config.yml</div>
+      <h2>إعدادات السيرفر</h2>
+      <p>يتحكم بعناوين الواجهات، رمز العملة، وقت الانتظار، الأصوات، التسجيل، وقت التراجع، وترتيب أزرار الشراء.</p>
+      <pre><code><span class="tok-k">shop-title:</span> <span class="tok-s">"§l§6» §r§eShop §l§6«"</span>
+<span class="tok-k">sell-title:</span> <span class="tok-s">"§l§2» §r§aSell Chest §l§2«"</span>
+<span class="tok-k">currency-symbol:</span> <span class="tok-s">"$"</span>
+<span class="tok-k">purchase-cooldown:</span> 0
+<span class="tok-k">log-transactions:</span> true
+<span class="tok-k">undo-time-limit:</span> 300
+
+<span class="tok-k">sounds:</span>
+  <span class="tok-k">enabled:</span> true
+  <span class="tok-k">on-purchase:</span> <span class="tok-s">"random.orb"</span>
+  <span class="tok-k">on-sell:</span> <span class="tok-s">"random.orb"</span>
+  <span class="tok-k">on-error:</span> <span class="tok-s">"mob.villager.no"</span></code></pre>
+      <p>الرسائل تدعم متغيرات مثل: <code>{amount}</code> <code>{item}</code> <code>{symbol}</code> <code>{price}</code> <code>{balance}</code> <code>{category}</code>.</p>
+    </div>
+  </section>
+
+  <section class="page" id="ar-6" dir="rtl">
+    <div class="page-inner">
+      <div class="eyebrow">shop.yml</div>
+      <h2>التصنيفات والعناصر</h2>
+      <p>تأتي الإضافة بـ 16 تصنيفاً افتراضياً — بلوكات، خشب، معادن، طعام، أدوات، سبونرات، سحر مخصص، وأكثر.</p>
+      <pre><code><span class="tok-k">categories:</span>
+  <span class="tok-k">block_building:</span>
+    <span class="tok-k">name:</span> <span class="tok-s">§r§eBuilding Blocks</span>
+    <span class="tok-k">icon:</span> 5
+    <span class="tok-k">items:</span>
+      - <span class="tok-k">id:</span> 1
+        <span class="tok-k">meta:</span> 0
+        <span class="tok-k">name:</span> <span class="tok-s">§r§eStone</span>
+        <span class="tok-k">price:</span> 30
+        <span class="tok-k">amount:</span> 1
+        <span class="tok-k">sell:</span> 8</code></pre>
+    </div>
+  </section>
+
+  <section class="page" id="ar-7" dir="rtl">
+    <div class="page-inner">
+      <div class="eyebrow">shop.yml</div>
+      <h2>تصنيفات اختيارية</h2>
+      <p><b>السبونرات</b> — تحتاج <code>SmartSpawner</code>:</p>
+      <pre><code><span class="tok-k">spawnerz:</span>
+  <span class="tok-k">spawner_types:</span>
+    <span class="tok-k">iron_golem:</span>
+      <span class="tok-k">items:</span>
+        - <span class="tok-k">id:</span> 52
+          <span class="tok-k">price:</span> 400000
+          <span class="tok-k">spawner_type:</span> iron_golem
+          <span class="tok-k">spawner_tier:</span> basic</code></pre>
+      <p><b>السحر المخصص</b> — تحتاج <code>AzCustomEnchant</code>:</p>
+      <pre><code><span class="tok-k">custom_enchants:</span>
+  <span class="tok-k">items:</span>
+    - <span class="tok-k">id:</span> 403
+      <span class="tok-k">name:</span> <span class="tok-s">§r§6Excavator Book</span>
+      <span class="tok-k">price:</span> 250000
+      <span class="tok-k">enchant_key:</span> excavator</code></pre>
+      <div class="note">التصنيفان يختفيان تلقائياً من <code>/shop</code> إذا كانت الإضافة الخاصة بكل واحد غير مثبّتة.</div>
+    </div>
+  </section>
+
+  <section class="page" id="ar-8" dir="rtl">
+    <div class="page-inner">
+      <div class="eyebrow">sell.yml</div>
+      <h2>قائمة البيع</h2>
+      <p>نفس بنية <code>shop.yml</code>. الأسعار هنا تمثل ما يحصل عليه اللاعب عند البيع — عادة أقل من سعر الشراء.</p>
+    </div>
+  </section>
+
+  <section class="page" id="ar-9" dir="rtl">
+    <div class="page-inner">
+      <div class="eyebrow">admin commands</div>
+      <h2>إدارة المتجر</h2>
+      <table>
+        <tr><th>الأمر</th><th>الوظيفة</th></tr>
+        <tr><td><code>/shopgui-add &lt;id:meta&gt; &lt;price&gt; &lt;amount&gt; [cat] [sell]</code></td><td>إضافة عنصر للمتجر</td></tr>
+        <tr><td><code>/shopgui-remove &lt;id:meta&gt; [cat]</code></td><td>حذف عنصر من المتجر</td></tr>
+        <tr><td><code>/shopgui-addcat &lt;key&gt; &lt;icon&gt; &lt;name&gt;</code></td><td>إنشاء تصنيف</td></tr>
+        <tr><td><code>/shopgui-removecat &lt;key&gt;</code></td><td>حذف تصنيف</td></tr>
+        <tr><td><code>/shopgui-listcat</code></td><td>عرض التصنيفات</td></tr>
+        <tr><td><code>/sellgui-*</code></td><td>نفس العمليات لقائمة البيع</td></tr>
+        <tr><td><code>/shopreload</code></td><td>إعادة تحميل كل ملفات الإعدادات</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="page" id="ar-10" dir="rtl">
+    <div class="page-inner">
+      <div class="eyebrow">integrations</div>
+      <h2>SmartSpawner و AzCustomEnchant</h2>
+      <div class="grid2">
+        <div class="card">
+          <span class="k">smartspawner</span>
+          <p>عناصر المتجر التي فيها <code>spawner_type</code> و <code>spawner_tier</code> تستدعي <code>giveSpawnerItem()</code> لإعطاء سبونر حقيقي بعلامة صحيحة.</p>
+        </div>
+        <div class="card">
+          <span class="k">azcustomenchant</span>
+          <p>عناصر المتجر التي فيها <code>enchant_key</code> تستدعي <code>createEnchantBookItem()</code> لإنشاء كتاب سحر بعلامة صحيحة.</p>
+        </div>
+      </div>
+      <p>كلاهما اعتماديات اختيارية — الإضافة تعمل بدونهما، وتصنيفاتهما تبقى مخفية فقط.</p>
+    </div>
+  </section>
+
+  <section class="page" id="ar-11" dir="rtl">
+    <div class="page-inner">
+      <div class="eyebrow">anti-dupe</div>
+      <h2>كيف يتم منع الاستغلال</h2>
+      <ol>
+        <li><b>علامة NBT</b> — كل عنصر داخل الواجهة يُعلَّم بـ <code>economygui_menu_item = 1</code></li>
+        <li><b>إلغاء المعاملات</b> — كل ضغطة داخل الواجهة تُعامل كإجراء قائمة، لا كحركة إنفنتوري حقيقية</li>
+        <li><b>تنظيف متعدد الأحداث</b> — العناصر المعلّمة تُزال عند المعاملة، الإغلاق، تغيير السلوت، الإسقاط، التفاعل، والخروج</li>
+        <li><b>عرض حقيقي للعنصر</b> — العناصر تظهر تماماً كما سيحصل عليها اللاعب، بأمان</li>
+      </ol>
+      <div class="note warn">على MCPE 0.14.3/0.15.x قد يظهر العنصر المعلّم للحظة واحدة قبل إزالته — هذا متوقع وغير ضار.</div>
+    </div>
+  </section>
+
+  <section class="page" id="ar-12" dir="rtl">
+    <div class="page-inner">
+      <div class="eyebrow">architecture</div>
+      <h2>البنية التقنية</h2>
+      <pre><code>EconomyGUI/
+├── EconomyGUI.php          <span class="tok-c"># الكلاس الرئيسي: أوامر، أحداث، منطق الواجهة</span>
+├── gui/
+│   ├── BaseGUI.php         <span class="tok-c"># الصندوق الوهمي والتنقل</span>
+│   ├── FakeHolder.php      <span class="tok-c"># حامل إنفنتوري وهمي</span>
+│   ├── OpenContainerTask.php <span class="tok-c"># فتح متأخر (2 تيك)</span>
+│   ├── ShopGUI.php
+│   └── SellChestGUI.php
+└── manager/
+    └── ConfigManager.php   <span class="tok-c"># ملفات الإعدادات</span></code></pre>
+      <p>الصندوق المزدوج هو بلوك وهمي: يُرسَل بلوكان صندوق للعميل، مرتبطان عبر NBT بـ <code>pairx/pairy/pairz</code>، يُفتحان بعد تأخير تيكين، ثم يُعادان لأصلهما عند الإغلاق.</p>
+    </div>
+  </section>
+
+  <section class="page" id="ar-13" dir="rtl">
+    <div class="page-inner">
+      <div class="eyebrow">troubleshooting</div>
+      <h2>مشاكل شائعة</h2>
+      <table>
+        <tr><th>المشكلة</th><th>الحل</th></tr>
+        <tr><td>"EconomyAPI not found!"</td><td>ثبّت EconomyAPI — مطلوبة لكل عمليات المال</td></tr>
+        <tr><td>تصنيف السبونرات / السحر مفقود</td><td>ثبّت SmartSpawner / AzCustomEnchant، أو احذف التصنيف من <code>shop.yml</code></td></tr>
+        <tr><td>الواجهة تُفتح ثم تُغلق فوراً</td><td>مشكلة معروفة على 0.14.3/0.15.x — تجنب الفتح أثناء الحركة</td></tr>
+        <tr><td>العنصر يظهر للحظة في الهوتبار</td><td>نظام منع الدوبلكيشن يعمل — غير ضار</td></tr>
+        <tr><td>التغييرات لا تُطبَّق</td><td>استخدم <code>/shopreload</code></td></tr>
+      </table>
+      <footer-line>EconomyGUI · بواسطة Aniss · رخصة MIT</footer-line>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  var currentLang = 'en';
+  var pageCount = { en: 14, ar: 14 };
+
+  function buildDots(lang){
+    var wrap = document.getElementById('navdots');
+    wrap.innerHTML = '';
+    var labels = lang === 'en'
+      ? ['Intro','Install','Commands','Shop','Selling','Config','Categories','Optional cats','Sell list','Admin cmds','Integrations','Anti-dupe','Architecture','Troubleshoot']
+      : ['البداية','التثبيت','الأوامر','المتجر','البيع','الإعدادات','التصنيفات','تصنيفات اختيارية','قائمة البيع','أوامر الأدمن','التكاملات','منع الدوبلكيشن','البنية','حل المشاكل'];
+    for (var i = 0; i < pageCount[lang]; i++){
+      (function(i){
+        var b = document.createElement('button');
+        b.dataset.i = i;
+        var tip = document.createElement('span');
+        tip.className = 'tip';
+        tip.textContent = labels[i];
+        b.appendChild(tip);
+        b.onclick = function(){
+          document.getElementById(lang + '-' + i).scrollIntoView({behavior:'smooth'});
+        };
+        wrap.appendChild(b);
+      })(i);
+    }
+    updateDots(0);
+  }
+
+  function updateDots(i){
+    var btns = document.querySelectorAll('#navdots button');
+    btns.forEach(function(b, idx){ b.classList.toggle('active', idx === i); });
+    document.getElementById('pnum').textContent = String(i + 1).padStart(2, '0');
+    document.getElementById('ptotal').textContent = pageCount[currentLang];
+  }
+
+  function attachObserver(lang){
+    var pager = document.getElementById('pager-' + lang);
+    var sections = pager.querySelectorAll('.page');
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting && e.intersectionRatio > 0.6){
+          var idx = Array.prototype.indexOf.call(sections, e.target);
+          updateDots(idx);
+        }
+      });
+    }, { root: pager, threshold: 0.6 });
+    sections.forEach(function(s){ obs.observe(s); });
+  }
+
+  function setLang(lang){
+    currentLang = lang;
+    document.getElementById('pager-en').style.display = lang === 'en' ? 'block' : 'none';
+    document.getElementById('pager-ar').style.display = lang === 'ar' ? 'block' : 'none';
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+    document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    buildDots(lang);
+  }
+
+  buildDots('en');
+  attachObserver('en');
+  attachObserver('ar');
+</script>
+</body>
+</html>

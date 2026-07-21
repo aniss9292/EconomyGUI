@@ -1,0 +1,98 @@
+name: EconomyGUI
+api: [2.0.0]
+author: Aniss
+main: EconomyGUI\EconomyGUI
+version: "1.0.0"
+description: "Shop & Sell GUI Plugin with Pagination, Sell Hand, Sell All, Undo, and Tick Sound"
+
+softdepend:
+  - SmartSpawner
+  - AzCustomEnchant
+
+commands:
+  shop:
+    description: "Open the Shop GUI"
+    usage: "/shop"
+    permission: economygui.shop
+  sell:
+    description: "Open Sell Chest, or use sell hand/all/undo"
+    usage: "/sell [hand|all|undo]"
+    permission: economygui.sell
+  shopreload:
+    description: "Reload the shop & sell configs"
+    usage: "/shopreload"
+    permission: economygui.reload
+  shopbalance:
+    description: "Check your money balance"
+    usage: "/shopbalance"
+    permission: economygui.shop
+
+  shopgui-add:
+    description: "Add an item to a shop category"
+    usage: "/shopgui-add <id:meta> <price> <amount> [category] [sellprice]"
+    permission: economygui.admin
+  shopgui-remove:
+    description: "Remove an item from the shop"
+    usage: "/shopgui-remove <id:meta> [category]"
+    permission: economygui.admin
+
+  shopgui-addcat:
+    description: "Create a new shop category"
+    usage: "/shopgui-addcat <key> <iconId> <displayName>"
+    permission: economygui.admin
+  shopgui-removecat:
+    description: "Delete a shop category"
+    usage: "/shopgui-removecat <key>"
+    permission: economygui.admin
+  shopgui-listcat:
+    description: "List all shop categories"
+    usage: "/shopgui-listcat"
+    permission: economygui.admin
+
+  sellgui-add:
+    description: "Add an item to a sell category"
+    usage: "/sellgui-add <id:meta> <price> <amount> [category]"
+    permission: economygui.admin
+  sellgui-remove:
+    description: "Remove an item from the sell list"
+    usage: "/sellgui-remove <id:meta> [category]"
+    permission: economygui.admin
+
+  sellgui-addcat:
+    description: "Create a new sell category"
+    usage: "/sellgui-addcat <key> <iconId> <displayName>"
+    permission: economygui.admin
+  sellgui-removecat:
+    description: "Delete a sell category"
+    usage: "/sellgui-removecat <key>"
+    permission: economygui.admin
+  sellgui-listcat:
+    description: "List all sell categories"
+    usage: "/sellgui-listcat"
+    permission: economygui.admin
+
+permissions:
+  economygui.shop:
+    description: "Use the shop"
+    default: true
+  economygui.sell:
+    description: "Use the sell chest and sell commands"
+    default: true
+  economygui.sell.hand:
+    description: "Use /sell hand"
+    default: true
+  economygui.sell.all:
+    description: "Use /sell all"
+    default: true
+  economygui.sell.undo:
+    description: "Use /sell undo"
+    default: true
+  economygui.reload:
+    description: "Reload configs"
+    default: op
+  economygui.admin:
+    description: "Manage shop/sell items and categories"
+    default: op
+  economygui.free:
+    description: "Buy items for free"
+    default: false

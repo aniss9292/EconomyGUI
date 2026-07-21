@@ -1,0 +1,1888 @@
+categories:
+  block_building:
+    name: §r§eBuilding Blocks
+    icon: 5
+    items:
+    - id: 1
+      meta: 0
+      name: §r§eStone
+      price: 8
+      amount: 1
+    - id: 1
+      meta: 1
+      name: §r§eGranite
+      price: 10
+      amount: 1
+    - id: 1
+      meta: 2
+      name: §r§ePolished Granite
+      price: 14
+      amount: 1
+    - id: 1
+      meta: 3
+      name: §r§eDiorite
+      price: 10
+      amount: 1
+    - id: 1
+      meta: 4
+      name: §r§ePolished Diorite
+      price: 14
+      amount: 1
+    - id: 1
+      meta: 5
+      name: §r§eAndesite
+      price: 10
+      amount: 1
+    - id: 1
+      meta: 6
+      name: §r§ePolished Andesite
+      price: 14
+      amount: 1
+    - id: 2
+      meta: 0
+      name: §r§eGrass Block
+      price: 5
+      amount: 1
+    - id: 3
+      meta: 0
+      name: §r§eDirt
+      price: 3
+      amount: 1
+    - id: 4
+      meta: 0
+      name: §r§eCobblestone
+      price: 4
+      amount: 1
+    - id: 5
+      meta: 0
+      name: §r§eWood Planks
+      price: 8
+      amount: 1
+    - id: 12
+      meta: 0
+      name: §r§eSand
+      price: 5
+      amount: 1
+    - id: 13
+      meta: 0
+      name: §r§eGravel
+      price: 5
+      amount: 1
+    - id: 24
+      meta: 0
+      name: §r§eSandstone
+      price: 10
+      amount: 1
+    - id: 45
+      meta: 0
+      name: §r§eBricks
+      price: 35
+      amount: 1
+    - id: 98
+      meta: 0
+      name: §r§eStone Bricks
+      price: 18
+      amount: 1
+    - id: 98
+      meta: 1
+      name: §r§eMossy Stone Bricks
+      price: 25
+      amount: 1
+    - id: 48
+      meta: 0
+      name: §r§eMossy Cobblestone
+      price: 25
+      amount: 1
+    - id: 49
+      meta: 0
+      name: §r§eObsidian
+      price: 45
+      amount: 1
+    - id: 112
+      meta: 0
+      name: §r§eNether Bricks
+      price: 25
+      amount: 1
+    - id: 121
+      meta: 0
+      name: §r§eEnd Stone
+      price: 30
+      amount: 1
+    - id: 82
+      meta: 0
+      name: §r§eClay Block
+      price: 10
+      amount: 1
+    - id: 80
+      meta: 0
+      name: §r§eSnow Block
+      price: 5
+      amount: 1
+    - id: 79
+      meta: 0
+      name: §r§eIce
+      price: 8
+      amount: 1
+    - id: 174
+      meta: 0
+      name: §r§ePacked Ice
+      price: 15
+      amount: 1
+    - id: 110
+      meta: 0
+      name: §r§eMycelium
+      price: 12
+      amount: 1
+    - id: 172
+      meta: 0
+      name: §r§eHardened Clay
+      price: 15
+      amount: 1
+    - id: 159
+      meta: 0
+      name: §r§eStained Clay
+      price: 20
+      amount: 1
+    - id: 179
+      meta: 0
+      name: §r§eRed Sandstone
+      price: 10
+      amount: 1
+    - id: 87
+      meta: 0
+      name: §r§eNetherrack
+      price: 10
+      amount: 1
+    - id: 88
+      meta: 0
+      name: §r§eSoul Sand
+      price: 18
+      amount: 1
+    - id: 89
+      meta: 0
+      name: §r§eGlowstone
+      price: 35
+      amount: 1
+    - id: 35
+      meta: 0
+      name: §r§eWool
+      price: 4
+      amount: 1
+    - id: 170
+      meta: 0
+      name: §r§eHay Bale
+      price: 18
+      amount: 1
+    - id: 165
+      meta: 0
+      name: §r§eSlime Block
+      price: 75
+      amount: 1
+    - id: 78
+      meta: 0
+      name: §r§eSnow Layer
+      price: 4
+      amount: 1
+    - id: 198
+      meta: 0
+      name: §r§eGrass Path
+      price: 12
+      amount: 1
+    - id: 243
+      meta: 0
+      name: §r§ePodzol
+      price: 12
+      amount: 1
+  block_wood_nature:
+    name: §r§aWood & Nature
+    icon: 17
+    items:
+    - id: 17
+      meta: 0
+      name: §r§eOak Log
+      price: 12
+      amount: 1
+    - id: 162
+      meta: 0
+      name: §r§eAcacia/Dark Oak Log
+      price: 12
+      amount: 1
+    - id: 18
+      meta: 0
+      name: §r§eOak Leaves
+      price: 2
+      amount: 1
+    - id: 161
+      meta: 0
+      name: §r§eAcacia/Dark Oak Leaves
+      price: 2
+      amount: 1
+    - id: 6
+      meta: 0
+      name: §r§eOak Sapling
+      price: 5
+      amount: 1
+    - id: 32
+      meta: 0
+      name: §r§eDead Bush
+      price: 1
+      amount: 1
+    - id: 31
+      meta: 0
+      name: §r§eTall Grass
+      price: 1
+      amount: 1
+    - id: 106
+      meta: 0
+      name: §r§eVines
+      price: 4
+      amount: 1
+    - id: 111
+      meta: 0
+      name: §r§eLily Pad
+      price: 8
+      amount: 1
+    - id: 37
+      meta: 0
+      name: §r§eDandelion
+      price: 4
+      amount: 1
+    - id: 38
+      meta: 0
+      name: §r§ePoppy
+      price: 4
+      amount: 1
+    - id: 175
+      meta: 0
+      name: §r§eTall Flower
+      price: 8
+      amount: 1
+    - id: 39
+      meta: 0
+      name: §r§eBrown Mushroom
+      price: 6
+      amount: 1
+    - id: 40
+      meta: 0
+      name: §r§eRed Mushroom
+      price: 6
+      amount: 1
+    - id: 99
+      meta: 0
+      name: §r§eBrown Mushroom Block
+      price: 18
+      amount: 1
+    - id: 100
+      meta: 0
+      name: §r§eRed Mushroom Block
+      price: 18
+      amount: 1
+    - id: 81
+      meta: 0
+      name: §r§eCactus
+      price: 2
+      amount: 1
+    - id: 338
+      meta: 0
+      name: §r§eSugar Cane
+      price: 2
+      amount: 1
+    - id: 86
+      meta: 0
+      name: §r§ePumpkin
+      price: 6
+      amount: 1
+    - id: 91
+      meta: 0
+      name: §r§eJack o'Lantern
+      price: 25
+      amount: 1
+    - id: 103
+      meta: 0
+      name: §r§eMelon
+      price: 7
+      amount: 1
+    - id: 30
+      meta: 0
+      name: §r§eCobweb
+      price: 8
+      amount: 1
+  block_stairs_slabs:
+    name: §r§6Stairs & Slabs
+    icon: 53
+    items:
+    - id: 53
+      meta: 0
+      name: §r§eOak Stairs
+      price: 18
+      amount: 1
+    - id: 67
+      meta: 0
+      name: §r§eCobble Stairs
+      price: 15
+      amount: 1
+    - id: 108
+      meta: 0
+      name: §r§eBrick Stairs
+      price: 55
+      amount: 1
+    - id: 109
+      meta: 0
+      name: §r§eStone Brick Stairs
+      price: 30
+      amount: 1
+    - id: 128
+      meta: 0
+      name: §r§eSandstone Stairs
+      price: 20
+      amount: 1
+    - id: 134
+      meta: 0
+      name: §r§eSpruce Stairs
+      price: 18
+      amount: 1
+    - id: 135
+      meta: 0
+      name: §r§eBirch Stairs
+      price: 18
+      amount: 1
+    - id: 136
+      meta: 0
+      name: §r§eJungle Stairs
+      price: 18
+      amount: 1
+    - id: 163
+      meta: 0
+      name: §r§eAcacia Stairs
+      price: 18
+      amount: 1
+    - id: 164
+      meta: 0
+      name: §r§eDark Oak Stairs
+      price: 18
+      amount: 1
+    - id: 114
+      meta: 0
+      name: §r§eNether Brick Stairs
+      price: 40
+      amount: 1
+    - id: 156
+      meta: 0
+      name: §r§eQuartz Stairs
+      price: 60
+      amount: 1
+    - id: 180
+      meta: 0
+      name: §r§eRed Sandstone Stairs
+      price: 20
+      amount: 1
+    - id: 44
+      meta: 0
+      name: §r§eStone Slab
+      price: 8
+      amount: 1
+    - id: 158
+      meta: 0
+      name: §r§eWood Slab
+      price: 6
+      amount: 1
+    - id: 182
+      meta: 0
+      name: §r§eStone Slab (2)
+      price: 8
+      amount: 1
+  block_doors_fences:
+    name: §r§bDoors & Fences
+    icon: 324
+    items:
+    - id: 324
+      meta: 0
+      name: §r§eOak Door
+      price: 25
+      amount: 1
+    - id: 330
+      meta: 0
+      name: §r§eIron Door
+      price: 90
+      amount: 1
+    - id: 427
+      meta: 0
+      name: §r§eSpruce Door
+      price: 25
+      amount: 1
+    - id: 428
+      meta: 0
+      name: §r§eBirch Door
+      price: 25
+      amount: 1
+    - id: 429
+      meta: 0
+      name: §r§eJungle Door
+      price: 25
+      amount: 1
+    - id: 430
+      meta: 0
+      name: §r§eAcacia Door
+      price: 25
+      amount: 1
+    - id: 431
+      meta: 0
+      name: §r§eDark Oak Door
+      price: 25
+      amount: 1
+    - id: 96
+      meta: 0
+      name: §r§eWood Trapdoor
+      price: 18
+      amount: 1
+    - id: 167
+      meta: 0
+      name: §r§eIron Trapdoor
+      price: 60
+      amount: 1
+    - id: 85
+      meta: 0
+      name: §r§eOak Fence
+      price: 12
+      amount: 1
+    - id: 107
+      meta: 0
+      name: §r§eOak Fence Gate
+      price: 18
+      amount: 1
+    - id: 113
+      meta: 0
+      name: §r§eNether Brick Fence
+      price: 25
+      amount: 1
+    - id: 183
+      meta: 0
+      name: §r§eSpruce Fence Gate
+      price: 18
+      amount: 1
+    - id: 184
+      meta: 0
+      name: §r§eBirch Fence Gate
+      price: 18
+      amount: 1
+    - id: 185
+      meta: 0
+      name: §r§eJungle Fence Gate
+      price: 18
+      amount: 1
+    - id: 186
+      meta: 0
+      name: §r§eDark Oak Fence Gate
+      price: 18
+      amount: 1
+    - id: 187
+      meta: 0
+      name: §r§eAcacia Fence Gate
+      price: 18
+      amount: 1
+    - id: 101
+      meta: 0
+      name: §r§eIron Bars
+      price: 9
+      amount: 1
+    - id: 102
+      meta: 0
+      name: §r§eGlass Pane
+      price: 12
+      amount: 1
+    - id: 139
+      meta: 0
+      name: §r§eCobblestone Wall
+      price: 12
+      amount: 1
+    - id: 65
+      meta: 0
+      name: §r§eLadder
+      price: 8
+      amount: 1
+  block_ores_minerals:
+    name: §r§dOres & Minerals
+    icon: 14
+    items:
+    - id: 16
+      meta: 0
+      name: §r§eCoal Ore
+      price: 25
+      amount: 1
+    - id: 15
+      meta: 0
+      name: §r§eIron Ore
+      price: 60
+      amount: 1
+    - id: 14
+      meta: 0
+      name: §r§eGold Ore
+      price: 100
+      amount: 1
+    - id: 56
+      meta: 0
+      name: §r§eDiamond Ore
+      price: 300
+      amount: 1
+    - id: 21
+      meta: 0
+      name: §r§eLapis Lazuli Ore
+      price: 45
+      amount: 1
+    - id: 73
+      meta: 0
+      name: §r§eRedstone Ore
+      price: 50
+      amount: 1
+    - id: 129
+      meta: 0
+      name: §r§eEmerald Ore
+      price: 400
+      amount: 1
+    - id: 153
+      meta: 0
+      name: §r§eNether Quartz Ore
+      price: 60
+      amount: 1
+    - id: 173
+      meta: 0
+      name: §r§eCoal Block
+      price: 200
+      amount: 1
+    - id: 42
+      meta: 0
+      name: §r§eIron Block
+      price: 480
+      amount: 1
+    - id: 41
+      meta: 0
+      name: §r§eGold Block
+      price: 800
+      amount: 1
+    - id: 57
+      meta: 0
+      name: §r§eDiamond Block
+      price: 6500
+      amount: 1
+    - id: 133
+      meta: 0
+      name: §r§eEmerald Block
+      price: 9500
+      amount: 1
+    - id: 22
+      meta: 0
+      name: §r§eLapis Lazuli Block
+      price: 360
+      amount: 1
+    - id: 152
+      meta: 0
+      name: §r§eRedstone Block
+      price: 440
+      amount: 1
+    - id: 155
+      meta: 0
+      name: §r§eQuartz Block
+      price: 240
+      amount: 1
+  block_redstone:
+    name: §r§cRedstone & Mechanics
+    icon: 331
+    items:
+    - id: 23
+      meta: 0
+      name: §r§eDispenser
+      price: 100
+      amount: 1
+    - id: 125
+      meta: 0
+      name: §r§eDropper
+      price: 90
+      amount: 1
+    - id: 25
+      meta: 0
+      name: §r§eNote Block
+      price: 45
+      amount: 1
+    - id: 46
+      meta: 0
+      name: §r§eTNT
+      price: 150
+      amount: 1
+    - id: 69
+      meta: 0
+      name: §r§eLever
+      price: 15
+      amount: 1
+    - id: 77
+      meta: 0
+      name: §r§eStone Button
+      price: 8
+      amount: 1
+    - id: 143
+      meta: 0
+      name: §r§eWood Button
+      price: 6
+      amount: 1
+    - id: 70
+      meta: 0
+      name: §r§eStone Pressure Plate
+      price: 18
+      amount: 1
+    - id: 72
+      meta: 0
+      name: §r§eWood Pressure Plate
+      price: 15
+      amount: 1
+    - id: 147
+      meta: 0
+      name: §r§eGold Pressure Plate
+      price: 225
+      amount: 1
+    - id: 148
+      meta: 0
+      name: §r§eIron Pressure Plate
+      price: 30
+      amount: 1
+    - id: 76
+      meta: 0
+      name: §r§eRedstone Torch
+      price: 25
+      amount: 1
+    - id: 123
+      meta: 0
+      name: §r§eRedstone Lamp
+      price: 60
+      amount: 1
+    - id: 356
+      meta: 0
+      name: §r§eRedstone Repeater
+      price: 35
+      amount: 1
+    - id: 404
+      meta: 0
+      name: §r§eRedstone Comparator
+      price: 60
+      amount: 1
+    - id: 151
+      meta: 0
+      name: §r§eDaylight Detector
+      price: 90
+      amount: 1
+    - id: 131
+      meta: 0
+      name: §r§eTripwire Hook
+      price: 18
+      amount: 1
+    - id: 132
+      meta: 0
+      name: §r§eTripwire
+      price: 5
+      amount: 1
+    - id: 28
+      meta: 0
+      name: §r§eDetector Rail
+      price: 45
+      amount: 1
+    - id: 66
+      meta: 0
+      name: §r§eRail
+      price: 6
+      amount: 1
+    - id: 27
+      meta: 0
+      name: §r§ePowered Rail
+      price: 14
+      amount: 1
+    - id: 126
+      meta: 0
+      name: §r§eActivator Rail
+      price: 10
+      amount: 1
+    - id: 410
+      meta: 0
+      name: §r§eHopper
+      price: 150
+      amount: 1
+    - id: 146
+      meta: 0
+      name: §r§eTrapped Chest
+      price: 60
+      amount: 1
+  block_utility:
+    name: §r§7Utility & Decor
+    icon: 58
+    items:
+    - id: 58
+      meta: 0
+      name: §r§eCrafting Table
+      price: 18
+      amount: 1
+    - id: 61
+      meta: 0
+      name: §r§eFurnace
+      price: 25
+      amount: 1
+    - id: 54
+      meta: 0
+      name: §r§eChest
+      price: 25
+      amount: 1
+    - id: 47
+      meta: 0
+      name: §r§eBookshelf
+      price: 75
+      amount: 1
+    - id: 116
+      meta: 0
+      name: §r§eEnchanting Table
+      price: 1500
+      amount: 1
+    - id: 145
+      meta: 0
+      name: §r§eAnvil
+      price: 600
+      amount: 1
+    - id: 379
+      meta: 0
+      name: §r§eBrewing Stand
+      price: 200
+      amount: 1
+    - id: 380
+      meta: 0
+      name: §r§eCauldron
+      price: 105
+      amount: 1
+    - id: 355
+      meta: 0
+      name: §r§eBed
+      price: 60
+      amount: 1
+    - id: 323
+      meta: 0
+      name: §r§eSign
+      price: 10
+      amount: 1
+    - id: 321
+      meta: 0
+      name: §r§ePainting
+      price: 30
+      amount: 1
+    - id: 390
+      meta: 0
+      name: §r§eFlower Pot
+      price: 12
+      amount: 1
+    - id: 389
+      meta: 0
+      name: §r§eItem Frame
+      price: 30
+      amount: 1
+    - id: 397
+      meta: 3
+      name: §r§eMob Head
+      price: 1500
+      amount: 1
+    - id: 50
+      meta: 0
+      name: §r§eTorch
+      price: 3
+      amount: 1
+    - id: 20
+      meta: 0
+      name: §r§eGlass
+      price: 15
+      amount: 1
+    - id: 354
+      meta: 0
+      name: §r§eCake
+      price: 90
+      amount: 1
+    - id: 171
+      meta: 0
+      name: §r§eCarpet
+      price: 6
+      amount: 1
+    - id: 245
+      meta: 0
+      name: §r§eStonecutter
+      price: 45
+      amount: 1
+    - id: 97
+      meta: 0
+      name: §r§eInfested Stone
+      price: 150
+      amount: 1
+    - id: 19
+      meta: 0
+      name: §r§eSponge
+      price: 1000
+      amount: 1
+  item_ores_resources:
+    name: §r§dOres & Resources
+    icon: 264
+    items:
+    - id: 263
+      meta: 0
+      name: §r§eCoal
+      price: 15
+      amount: 1
+    - id: 265
+      meta: 0
+      name: §r§eIron Ingot
+      price: 10
+      amount: 1
+    - id: 266
+      meta: 0
+      name: §r§eGold Ingot
+      price: 75
+      amount: 1
+    - id: 264
+      meta: 0
+      name: §r§eDiamond
+      price: 400
+      amount: 1
+    - id: 388
+      meta: 0
+      name: §r§eEmerald
+      price: 600
+      amount: 1
+    - id: 331
+      meta: 0
+      name: §r§eRedstone Dust
+      price: 5
+      amount: 1
+    - id: 351
+      meta: 4
+      name: §r§eLapis Lazuli
+      price: 22
+      amount: 1
+    - id: 406
+      meta: 0
+      name: §r§eNether Quartz
+      price: 18
+      amount: 1
+    - id: 336
+      meta: 0
+      name: §r§eClay Brick
+      price: 8
+      amount: 1
+    - id: 405
+      meta: 0
+      name: §r§eNether Brick
+      price: 12
+      amount: 1
+    - id: 371
+      meta: 0
+      name: §r§eGold Nugget
+      price: 7
+      amount: 1
+    - id: 280
+      meta: 0
+      name: §r§eStick
+      price: 1
+      amount: 1
+    - id: 318
+      meta: 0
+      name: §r§eFlint
+      price: 4
+      amount: 1
+  item_food:
+    name: §r§6Food & Drinks
+    icon: 364
+    items:
+    - id: 260
+      meta: 0
+      name: §r§eApple
+      price: 8
+      amount: 1
+    - id: 322
+      meta: 0
+      name: §r§6Golden Apple
+      price: 1500
+      amount: 1
+    - id: 466
+      meta: 1
+      name: §r§dEnchanted Golden Apple
+      price: 2000
+      amount: 1
+    - id: 282
+      meta: 0
+      name: §r§eMushroom Stew
+      price: 18
+      amount: 1
+    - id: 297
+      meta: 0
+      name: §r§eBread
+      price: 12
+      amount: 1
+    - id: 319
+      meta: 0
+      name: §r§eRaw Porkchop
+      price: 2
+      amount: 1
+    - id: 320
+      meta: 0
+      name: §r§eCooked Porkchop
+      price: 22
+      amount: 1
+    - id: 363
+      meta: 0
+      name: §r§eRaw Beef
+      price: 3
+      amount: 1
+    - id: 364
+      meta: 0
+      name: §r§eSteak
+      price: 22
+      amount: 1
+    - id: 365
+      meta: 0
+      name: §r§eRaw Chicken
+      price: 2
+      amount: 1
+    - id: 366
+      meta: 0
+      name: §r§eCooked Chicken
+      price: 15
+      amount: 1
+    - id: 411
+      meta: 0
+      name: §r§eRaw Rabbit
+      price: 8
+      amount: 1
+    - id: 412
+      meta: 0
+      name: §r§eCooked Rabbit
+      price: 20
+      amount: 1
+    - id: 413
+      meta: 0
+      name: §r§eRabbit Stew
+      price: 35
+      amount: 1
+    - id: 349
+      meta: 0
+      name: §r§eRaw Fish
+      price: 7
+      amount: 1
+    - id: 350
+      meta: 0
+      name: §r§eCooked Fish
+      price: 18
+      amount: 1
+    - id: 349
+      meta: 1
+      name: §r§eRaw Salmon
+      price: 7
+      amount: 1
+    - id: 350
+      meta: 1
+      name: §r§eCooked Salmon
+      price: 20
+      amount: 1
+    - id: 349
+      meta: 2
+      name: §r§eClownfish
+      price: 9
+      amount: 1
+    - id: 349
+      meta: 3
+      name: §r§ePufferfish
+      price: 12
+      amount: 1
+    - id: 357
+      meta: 0
+      name: §r§eCookie
+      price: 4
+      amount: 1
+    - id: 360
+      meta: 0
+      name: §r§eMelon Slice
+      price: 3
+      amount: 1
+    - id: 391
+      meta: 0
+      name: §r§eCarrot
+      price: 3
+      amount: 1
+    - id: 392
+      meta: 0
+      name: §r§ePotato
+      price: 3
+      amount: 1
+    - id: 393
+      meta: 0
+      name: §r§eBaked Potato
+      price: 8
+      amount: 1
+    - id: 394
+      meta: 0
+      name: §r§ePoisonous Potato
+      price: 1
+      amount: 1
+    - id: 396
+      meta: 0
+      name: §r§eGolden Carrot
+      price: 150
+      amount: 1
+    - id: 400
+      meta: 0
+      name: §r§ePumpkin Pie
+      price: 24
+      amount: 1
+    - id: 457
+      meta: 0
+      name: §r§eBeetroot
+      price: 2
+      amount: 1
+    - id: 459
+      meta: 0
+      name: §r§eBeetroot Soup
+      price: 20
+      amount: 1
+    - id: 367
+      meta: 0
+      name: §r§eRotten Flesh
+      price: 1
+      amount: 1
+    - id: 375
+      meta: 0
+      name: §r§eSpider Eye
+      price: 2
+      amount: 1
+    - id: 325
+      meta: 1
+      name: §r§eMilk Bucket
+      price: 75
+      amount: 1
+  item_farming:
+    name: §r§aFarming & Seeds
+    icon: 296
+    items:
+    - id: 295
+      meta: 0
+      name: §r§eWheat Seeds
+      price: 4
+      amount: 1
+    - id: 296
+      meta: 0
+      name: §r§eWheat
+      price: 6
+      amount: 1
+    - id: 361
+      meta: 0
+      name: §r§ePumpkin Seeds
+      price: 6
+      amount: 1
+    - id: 362
+      meta: 0
+      name: §r§eMelon Seeds
+      price: 6
+      amount: 1
+    - id: 372
+      meta: 0
+      name: §r§eNether Wart
+      price: 10
+      amount: 1
+    - id: 458
+      meta: 0
+      name: §r§eBeetroot Seeds
+      price: 4
+      amount: 1
+    - id: 353
+      meta: 0
+      name: §r§eSugar
+      price: 5
+      amount: 1
+    - id: 337
+      meta: 0
+      name: §r§eClay
+      price: 5
+      amount: 1
+    - id: 344
+      meta: 0
+      name: §r§eEgg
+      price: 1
+      amount: 1
+    - id: 332
+      meta: 0
+      name: §r§eSnowball
+      price: 1
+      amount: 1
+    - id: 281
+      meta: 0
+      name: §r§eBowl
+      price: 4
+      amount: 1
+  item_mob_drops:
+    name: §r§cMob Drops
+    icon: 352
+    items:
+    - id: 352
+      meta: 0
+      name: §r§eBone
+      price: 3
+      amount: 1
+    - id: 287
+      meta: 0
+      name: §r§eString
+      price: 1
+      amount: 1
+    - id: 289
+      meta: 0
+      name: §r§eGunpowder
+      price: 3
+      amount: 1
+    - id: 288
+      meta: 0
+      name: §r§eFeather
+      price: 1
+      amount: 1
+    - id: 334
+      meta: 0
+      name: §r§eLeather
+      price: 3
+      amount: 1
+    - id: 369
+      meta: 0
+      name: §r§eBlaze Rod
+      price: 15
+      amount: 1
+    - id: 370
+      meta: 0
+      name: §r§eGhast Tear
+      price: 75
+      amount: 1
+    - id: 378
+      meta: 0
+      name: §r§eMagma Cream
+      price: 45
+      amount: 1
+    - id: 341
+      meta: 0
+      name: §r§eSlimeball
+      price: 15
+      amount: 1
+    - id: 348
+      meta: 0
+      name: §r§eGlowstone Dust
+      price: 12
+      amount: 1
+    - id: 377
+      meta: 0
+      name: §r§eBlaze Powder
+      price: 30
+      amount: 1
+    - id: 376
+      meta: 0
+      name: §r§eFermented Spider Eye
+      price: 15
+      amount: 1
+    - id: 414
+      meta: 0
+      name: §r§eRabbit Foot
+      price: 30
+      amount: 1
+    - id: 382
+      meta: 0
+      name: §r§eGlistering Melon
+      price: 150
+      amount: 1
+  item_tools:
+    name: §r§eTools
+    icon: 278
+    items:
+    - id: 270
+      meta: 0
+      name: §r§eWooden Pickaxe
+      price: 30
+      amount: 1
+    - id: 274
+      meta: 0
+      name: §r§eStone Pickaxe
+      price: 90
+      amount: 1
+    - id: 257
+      meta: 0
+      name: §r§eIron Pickaxe
+      price: 45
+      amount: 1
+    - id: 285
+      meta: 0
+      name: §r§eGold Pickaxe
+      price: 338
+      amount: 1
+    - id: 278
+      meta: 0
+      name: §r§eDiamond Pickaxe
+      price: 1800
+      amount: 1
+    - id: 271
+      meta: 0
+      name: §r§eWooden Axe
+      price: 30
+      amount: 1
+    - id: 275
+      meta: 0
+      name: §r§eStone Axe
+      price: 90
+      amount: 1
+    - id: 258
+      meta: 0
+      name: §r§eIron Axe
+      price: 45
+      amount: 1
+    - id: 286
+      meta: 0
+      name: §r§eGold Axe
+      price: 338
+      amount: 1
+    - id: 279
+      meta: 0
+      name: §r§eDiamond Axe
+      price: 1800
+      amount: 1
+    - id: 269
+      meta: 0
+      name: §r§eWooden Shovel
+      price: 22
+      amount: 1
+    - id: 273
+      meta: 0
+      name: §r§eStone Shovel
+      price: 75
+      amount: 1
+    - id: 256
+      meta: 0
+      name: §r§eIron Shovel
+      price: 15
+      amount: 1
+    - id: 284
+      meta: 0
+      name: §r§eGold Shovel
+      price: 113
+      amount: 1
+    - id: 277
+      meta: 0
+      name: §r§eDiamond Shovel
+      price: 600
+      amount: 1
+    - id: 290
+      meta: 0
+      name: §r§eWooden Hoe
+      price: 22
+      amount: 1
+    - id: 291
+      meta: 0
+      name: §r§eStone Hoe
+      price: 75
+      amount: 1
+    - id: 292
+      meta: 0
+      name: §r§eIron Hoe
+      price: 30
+      amount: 1
+    - id: 294
+      meta: 0
+      name: §r§eGold Hoe
+      price: 225
+      amount: 1
+    - id: 293
+      meta: 0
+      name: §r§eDiamond Hoe
+      price: 1200
+      amount: 1
+  item_combat_armor:
+    name: §r§4Combat & Armor
+    icon: 276
+    items:
+    - id: 268
+      meta: 0
+      name: §r§eWooden Sword
+      price: 45
+      amount: 1
+    - id: 272
+      meta: 0
+      name: §r§eStone Sword
+      price: 120
+      amount: 1
+    - id: 267
+      meta: 0
+      name: §r§eIron Sword
+      price: 30
+      amount: 1
+    - id: 283
+      meta: 0
+      name: §r§eGold Sword
+      price: 225
+      amount: 1
+    - id: 276
+      meta: 0
+      name: §r§eDiamond Sword
+      price: 1200
+      amount: 1
+    - id: 261
+      meta: 0
+      name: §r§eBow
+      price: 300
+      amount: 1
+    - id: 262
+      meta: 0
+      name: §r§eArrow
+      price: 1
+      amount: 1
+    - id: 298
+      meta: 0
+      name: §r§eLeather Cap
+      price: 60
+      amount: 1
+    - id: 299
+      meta: 0
+      name: §r§eLeather Tunic
+      price: 90
+      amount: 1
+    - id: 300
+      meta: 0
+      name: §r§eLeather Pants
+      price: 75
+      amount: 1
+    - id: 301
+      meta: 0
+      name: §r§eLeather Boots
+      price: 60
+      amount: 1
+    - id: 302
+      meta: 0
+      name: §r§eChain Helmet
+      price: 120
+      amount: 1
+    - id: 303
+      meta: 0
+      name: §r§eChain Chestplate
+      price: 180
+      amount: 1
+    - id: 304
+      meta: 0
+      name: §r§eChain Leggings
+      price: 150
+      amount: 1
+    - id: 305
+      meta: 0
+      name: §r§eChain Boots
+      price: 120
+      amount: 1
+    - id: 306
+      meta: 0
+      name: §r§eIron Helmet
+      price: 75
+      amount: 1
+    - id: 307
+      meta: 0
+      name: §r§eIron Chestplate
+      price: 120
+      amount: 1
+    - id: 308
+      meta: 0
+      name: §r§eIron Leggings
+      price: 105
+      amount: 1
+    - id: 309
+      meta: 0
+      name: §r§eIron Boots
+      price: 60
+      amount: 1
+    - id: 310
+      meta: 0
+      name: §r§eDiamond Helmet
+      price: 3000
+      amount: 1
+    - id: 311
+      meta: 0
+      name: §r§eDiamond Chestplate
+      price: 4800
+      amount: 1
+    - id: 312
+      meta: 0
+      name: §r§eDiamond Leggings
+      price: 4200
+      amount: 1
+    - id: 313
+      meta: 0
+      name: §r§eDiamond Boots
+      price: 2400
+      amount: 1
+    - id: 314
+      meta: 0
+      name: §r§eGold Helmet
+      price: 563
+      amount: 1
+    - id: 315
+      meta: 0
+      name: §r§eGold Chestplate
+      price: 900
+      amount: 1
+    - id: 316
+      meta: 0
+      name: §r§eGold Leggings
+      price: 788
+      amount: 1
+    - id: 317
+      meta: 0
+      name: §r§eGold Boots
+      price: 450
+      amount: 1
+  item_misc:
+    name: §r§7Miscellaneous
+    icon: 329
+    items:
+    - id: 325
+      meta: 0
+      name: §r§eBucket
+      price: 45
+      amount: 1
+    - id: 346
+      meta: 0
+      name: §r§eFishing Rod
+      price: 25
+      amount: 1
+    - id: 359
+      meta: 0
+      name: §r§eShears
+      price: 30
+      amount: 1
+    - id: 259
+      meta: 0
+      name: §r§eFlint And Steel
+      price: 15
+      amount: 1
+    - id: 374
+      meta: 0
+      name: §r§fGlass Bottle
+      price: 5
+      amount: 1
+    - id: 373
+      meta: 0
+      name: §r§bWater Bottle
+      price: 8
+      amount: 1
+    - id: 329
+      meta: 0
+      name: §r§6§lSaddle
+      price: 120000
+      amount: 1
+    - id: 345
+      meta: 0
+      name: §r§eCompass
+      price: 60
+      amount: 1
+    - id: 347
+      meta: 0
+      name: §r§eClock
+      price: 450
+      amount: 1
+    - id: 340
+      meta: 0
+      name: §r§eBook
+      price: 30
+      amount: 1
+    - id: 339
+      meta: 0
+      name: §r§ePaper
+      price: 5
+      amount: 1
+    - id: 321
+      meta: 0
+      name: §r§ePainting
+      price: 45
+      amount: 1
+    - id: 328
+      meta: 0
+      name: §r§eMinecart
+      price: 75
+      amount: 1
+    - id: 342
+      meta: 0
+      name: §r§eMinecart With Chest
+      price: 120
+      amount: 1
+    - id: 407
+      meta: 0
+      name: §r§eMinecart With Hopper
+      price: 180
+      amount: 1
+    - id: 408
+      meta: 0
+      name: §r§eMinecart With TNT
+      price: 180
+      amount: 1
+    - id: 333
+      meta: 0
+      name: §r§eBoat
+      price: 60
+      amount: 1
+    - id: 395
+      meta: 0
+      name: §r§eMap
+      price: 12
+      amount: 1
+    - id: 384
+      meta: 0
+      name: §r§eBottle o' Enchanting
+      price: 150
+      amount: 1
+  spawnerz:
+    name: §r§bSpawnerz
+    icon: 52
+    spawner_types:
+      iron_golem:
+        name: §r§bIron Golem Spawners
+        icon: 52
+        items:
+        - id: 52
+          meta: 0
+          name: §7Basic Iron Golem Spawner
+          price: 100000
+          amount: 1
+          spawner_type: iron_golem
+          spawner_tier: basic
+        - id: 52
+          meta: 0
+          name: §aAdvanced Iron Golem Spawner
+          price: 150000
+          amount: 1
+          spawner_type: iron_golem
+          spawner_tier: advanced
+        - id: 52
+          meta: 0
+          name: §bElite Iron Golem Spawner
+          price: 350000
+          amount: 1
+          spawner_type: iron_golem
+          spawner_tier: elite
+        - id: 52
+          meta: 0
+          name: §6Legendary Iron Golem Spawner
+          price: 720000
+          amount: 1
+          spawner_type: iron_golem
+          spawner_tier: legendary
+      skeleton:
+        name: §r§bSkeleton Spawners
+        icon: 52
+        items:
+        - id: 52
+          meta: 0
+          name: §7Basic Skeleton Spawner
+          price: 50000
+          amount: 1
+          spawner_type: skeleton
+          spawner_tier: basic
+        - id: 52
+          meta: 0
+          name: §aAdvanced Skeleton Spawner
+          price: 100000
+          amount: 1
+          spawner_type: skeleton
+          spawner_tier: advanced
+        - id: 52
+          meta: 0
+          name: §bElite Skeleton Spawner
+          price: 267000
+          amount: 1
+          spawner_type: skeleton
+          spawner_tier: elite
+        - id: 52
+          meta: 0
+          name: §6Legendary Skeleton Spawner
+          price: 525000
+          amount: 1
+          spawner_type: skeleton
+          spawner_tier: legendary
+      zombie:
+        name: §r§bZombie Spawners
+        icon: 52
+        items:
+        - id: 52
+          meta: 0
+          name: §7Basic Zombie Spawner
+          price: 30000
+          amount: 1
+          spawner_type: zombie
+          spawner_tier: basic
+        - id: 52
+          meta: 0
+          name: §aAdvanced Zombie Spawner
+          price: 80000
+          amount: 1
+          spawner_type: zombie
+          spawner_tier: advanced
+        - id: 52
+          meta: 0
+          name: §bElite Zombie Spawner
+          price: 206000
+          amount: 1
+          spawner_type: zombie
+          spawner_tier: elite
+        - id: 52
+          meta: 0
+          name: §6Legendary Zombie Spawner
+          price: 515000
+          amount: 1
+          spawner_type: zombie
+          spawner_tier: legendary
+      creeper:
+        name: §r§bCreeper Spawners
+        icon: 52
+        items:
+        - id: 52
+          meta: 0
+          name: §7Basic Creeper Spawner
+          price: 49000
+          amount: 1
+          spawner_type: creeper
+          spawner_tier: basic
+        - id: 52
+          meta: 0
+          name: §aAdvanced Creeper Spawner
+          price: 76000
+          amount: 1
+          spawner_type: creeper
+          spawner_tier: advanced
+        - id: 52
+          meta: 0
+          name: §bElite Creeper Spawner
+          price: 155000
+          amount: 1
+          spawner_type: creeper
+          spawner_tier: elite
+        - id: 52
+          meta: 0
+          name: §6Legendary Creeper Spawner
+          price: 530000
+          amount: 1
+          spawner_type: creeper
+          spawner_tier: legendary
+      spider:
+        name: §r§bSpider Spawners
+        icon: 52
+        items:
+        - id: 52
+          meta: 0
+          name: §7Basic Spider Spawner
+          price: 25000
+          amount: 1
+          spawner_type: spider
+          spawner_tier: basic
+        - id: 52
+          meta: 0
+          name: §aAdvanced Spider Spawner
+          price: 45000
+          amount: 1
+          spawner_type: spider
+          spawner_tier: advanced
+        - id: 52
+          meta: 0
+          name: §bElite Spider Spawner
+          price: 145000
+          amount: 1
+          spawner_type: spider
+          spawner_tier: elite
+        - id: 52
+          meta: 0
+          name: §6Legendary Spider Spawner
+          price: 520000
+          amount: 1
+          spawner_type: spider
+          spawner_tier: legendary
+      pig:
+        name: §r§bPig Spawners
+        icon: 52
+        items:
+        - id: 52
+          meta: 0
+          name: §7Basic Pig Spawner
+          price: 10000
+          amount: 1
+          spawner_type: pig
+          spawner_tier: basic
+        - id: 52
+          meta: 0
+          name: §aAdvanced Pig Spawner
+          price: 49000
+          amount: 1
+          spawner_type: pig
+          spawner_tier: advanced
+        - id: 52
+          meta: 0
+          name: §bElite Pig Spawner
+          price: 130000
+          amount: 1
+          spawner_type: pig
+          spawner_tier: elite
+        - id: 52
+          meta: 0
+          name: §6Legendary Pig Spawner
+          price: 505000
+          amount: 1
+          spawner_type: pig
+          spawner_tier: legendary
+      cow:
+        name: §r§bCow Spawners
+        icon: 52
+        items:
+        - id: 52
+          meta: 0
+          name: §7Basic Cow Spawner
+          price: 15000
+          amount: 1
+          spawner_type: cow
+          spawner_tier: basic
+        - id: 52
+          meta: 0
+          name: §aAdvanced Cow Spawner
+          price: 65000
+          amount: 1
+          spawner_type: cow
+          spawner_tier: advanced
+        - id: 52
+          meta: 0
+          name: §bElite Cow Spawner
+          price: 222000
+          amount: 1
+          spawner_type: cow
+          spawner_tier: elite
+        - id: 52
+          meta: 0
+          name: §6Legendary Cow Spawner
+          price: 508000
+          amount: 1
+          spawner_type: cow
+          spawner_tier: legendary
+      chicken:
+        name: §r§bChicken Spawners
+        icon: 52
+        items:
+        - id: 52
+          meta: 0
+          name: §7Basic Chicken Spawner
+          price: 8000
+          amount: 1
+          spawner_type: chicken
+          spawner_tier: basic
+        - id: 52
+          meta: 0
+          name: §aAdvanced Chicken Spawner
+          price: 40000
+          amount: 1
+          spawner_type: chicken
+          spawner_tier: advanced
+        - id: 52
+          meta: 0
+          name: §bElite Chicken Spawner
+          price: 129000
+          amount: 1
+          spawner_type: chicken
+          spawner_tier: elite
+        - id: 52
+          meta: 0
+          name: §6Legendary Chicken Spawner
+          price: 504000
+          amount: 1
+          spawner_type: chicken
+          spawner_tier: legendary
+      sheep:
+        name: §r§bSheep Spawners
+        icon: 52
+        items:
+        - id: 52
+          meta: 0
+          name: §7Basic Sheep Spawner
+          price: 12000
+          amount: 1
+          spawner_type: sheep
+          spawner_tier: basic
+        - id: 52
+          meta: 0
+          name: §aAdvanced Sheep Spawner
+          price: 62000
+          amount: 1
+          spawner_type: sheep
+          spawner_tier: advanced
+        - id: 52
+          meta: 0
+          name: §bElite Sheep Spawner
+          price: 206000
+          amount: 1
+          spawner_type: sheep
+          spawner_tier: elite
+        - id: 52
+          meta: 0
+          name: §6Legendary Sheep Spawner
+          price: 506000
+          amount: 1
+          spawner_type: sheep
+          spawner_tier: legendary
+      blaze:
+        name: §r§bBlaze Spawners
+        icon: 52
+        items:
+        - id: 52
+          meta: 0
+          name: §7Basic Blaze Spawner
+          price: 86000
+          amount: 1
+          spawner_type: blaze
+          spawner_tier: basic
+        - id: 52
+          meta: 0
+          name: §aAdvanced Blaze Spawner
+          price: 131000
+          amount: 1
+          spawner_type: blaze
+          spawner_tier: advanced
+        - id: 52
+          meta: 0
+          name: §bElite Blaze Spawner
+          price: 222000
+          amount: 1
+          spawner_type: blaze
+          spawner_tier: elite
+        - id: 52
+          meta: 0
+          name: §6Legendary Blaze Spawner
+          price: 575000
+          amount: 1
+          spawner_type: blaze
+          spawner_tier: legendary
+      witch:
+        name: §r§bWitch Spawners
+        icon: 52
+        items:
+        - id: 52
+          meta: 0
+          name: §7Basic Witch Spawner
+          price: 120000
+          amount: 1
+          spawner_type: witch
+          spawner_tier: basic
+        - id: 52
+          meta: 0
+          name: §aAdvanced Witch Spawner
+          price: 170000
+          amount: 1
+          spawner_type: witch
+          spawner_tier: advanced
+        - id: 52
+          meta: 0
+          name: §bElite Witch Spawner
+          price: 342000
+          amount: 1
+          spawner_type: witch
+          spawner_tier: elite
+        - id: 52
+          meta: 0
+          name: §6Legendary Witch Spawner
+          price: 560000
+          amount: 1
+          spawner_type: witch
+          spawner_tier: legendary

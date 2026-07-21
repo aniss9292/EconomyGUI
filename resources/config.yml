@@ -1,0 +1,91 @@
+# ╔══════════════════════════════════════════╗
+# ║        EconomyGUI - config.yml           ║
+# ╚══════════════════════════════════════════╝
+
+shop-title: "§l§6» §r§eShop §l§6«"
+
+sell-title: "§l§2» §r§aSell Chest §l§2«"
+
+confirm-sell-title: "§l§e» §r§6Confirm Sell §l§e«"
+
+currency-symbol: "$"
+
+default-category: "general"
+
+default-category-icon: 54
+
+purchase-cooldown: 0
+
+log-transactions: true
+
+# Undo time limit in seconds (default: 5 minutes = 300)
+undo-time-limit: 300
+
+sounds:
+  enabled: true
+  on-purchase: "random.orb"
+  on-sell: "random.orb"
+  on-error: "mob.villager.no"
+
+buy-slots:
+  - slot: 11
+    amount: 1
+  - slot: 13
+    amount: 10
+  - slot: 15
+    amount: 64
+
+sell-multipliers:
+  - slot: 11
+    multiplier: 1
+  - slot: 13
+    multiplier: 2
+  - slot: 15
+    multiplier: 5
+
+back-button-meta: 14
+back-button-name: "§r§c« Back"
+
+messages:
+  shop-opened:       "§8[§aEconomy§bGUI§8] §7» §aShop opened! §fType §e/shopbalance §fto check your §6balance§f."
+  purchase-success:  "§8[§aEconomy§bGUI§8] §a[+] §fBought §e{amount}x §6{item} §ffor §a{symbol}{price}§f!"
+  sell-success:      "§8[§aEconomy§bGUI§8] §a[+] §fSold §e{amount}x §6{item} §ffor §a{symbol}{price}§f!"
+  not-enough-money:  "§8[§aEconomy§bGUI§8] §c[-] §fNeed §e{symbol}{needed} §7more to buy§f!"
+  not-enough-items:  "§8[§aEconomy§bGUI§8] §c[-] §fNeed §e{amount}x §6{item} §8— §7have §e{has} §7only§f."
+  inventory-full:    "§8[§aEconomy§bGUI§8] §c[-] §fInventory is §cfull§7!"
+  no-permission:     "§8[§aEconomy§bGUI§8] §7» §cNo §fpermission§7."
+  shop-reloaded:     "§8[§aEconomy§bGUI§8] §7» §aConfigs §freloaded §7successfully§f."
+  balance:           "§8[§aEconomy§bGUI§8] §7» §fBalance§8: §6{symbol}{balance}"
+  free-purchase:     "§8[§aEconomy§bGUI§8] §b[/] §fGot §e{amount}x §6{item} §bfor free §8(§7admin perk§8)§f!"
+  item-added:        "§8[§aEconomy§bGUI§8] §7» §aAdded §6{item} §8(§eID §e{id}:{meta}§8) §7to §a{category} §8| §fPrice§8: §a{symbol}{price} §8| §fAmt§8: §e{amount}§f."
+  item-removed:      "§8[§aEconomy§bGUI§8] §7» §aRemoved §e{id}:{meta} §7from §fshop§7."
+  item-not-found:    "§8[§aEconomy§bGUI§8] §7» §e{id}:{meta} §cnot found §7in shop§f."
+  sell-item-added:   "§8[§aEconomy§bGUI§8] §7» §aAdded §6{item} §8(§eID §e{id}:{meta}§8) §7to §a{category} §8| §fPayout§8: §a{symbol}{price} §8| §fAmt§8: §e{amount}§f."
+  sell-item-removed: "§8[§aEconomy§bGUI§8] §7» §aRemoved §e{id}:{meta} §7from §fsell list§7."
+  sell-item-not-found: "§8[§aEconomy§bGUI§8] §7» §e{id}:{meta} §cnot found §7in sell list§f."
+  usage-add:         "§8[§aEconomy§bGUI§8] §7» §eUsage§8: §f/shopgui-add §e<id:meta> §6<price> §e<amount> §7[category] [sellprice]"
+  usage-remove:      "§8[§aEconomy§bGUI§8] §7» §eUsage§8: §f/shopgui-remove §e<id:meta> §7[category]"
+  usage-sell-add:    "§8[§aEconomy§bGUI§8] §7» §eUsage§8: §f/sellgui-add §e<id:meta> §6<price> §e<amount> §7[category]"
+  usage-sell-remove: "§8[§aEconomy§bGUI§8] §7» §eUsage§8: §f/sellgui-remove §e<id:meta> §7[category]"
+  invalid-id:        "§8[§aEconomy§bGUI§8] §7» §cInvalid format§7. §fUse §e<id:meta> §8(§7e.g. §e2:0§8)"
+
+  # --- NEW: Sell Chest messages ---
+  sell-chest-success: "§8[§aEconomy§bGUI§8] §7» §aSold §e{amount}x §aitems §8| §fEarned§8: §a+{symbol}{price}"
+  sell-no-items:     "§cNo sellable items found!"
+  sell-not-sellable:  "§cThis item cannot be sold!"
+  sell-returned:      "§7{count} item stack(s) returned (not sellable)."
+  sell-cancelled:     "§cSell cancelled. Items returned."
+
+  # --- NEW: Sell Hand messages ---
+  sell-hand-empty:    "§cYou are not holding any item!"
+  sell-hand-success:  "§aSold §e{amount}x §6{item} §afor §e{symbol}{price}§a!"
+
+  # --- NEW: Sell All messages ---
+  sell-all-success:   "§aSold §e{amount}x §aitems for §e{symbol}{price}§a!"
+
+  # --- NEW: Sell Undo messages ---
+  sell-no-undo:       "§cNo sell to undo!"
+  sell-undo-expired:  "§cUndo time expired (5 min limit)!"
+  sell-undo-no-money: "§cNot enough money to undo!"
+  sell-undo-no-space: "§cNot enough inventory space to undo!"
+  sell-undo-success:  "§aUndo successful! §e{symbol}{price} §adeducted, items returned."
