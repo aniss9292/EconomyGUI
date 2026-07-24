@@ -2,7 +2,7 @@
 
 **GUI-based shop & sell plugin** for legacy PocketMine-MP / Genisys servers (MCPE 0.14.3/0.15.x). A double-chest interface for buying and selling items with real money, no signs or commands needed for players.
 
-Forked from @VeoZax
+Forked from @VeoZax EconomeyGUI plugin (Thanks)
 ---
 
 ## Features
