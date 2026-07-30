@@ -11,8 +11,6 @@ Forked from @VeoZax EconomeyGUI plugin (Thanks)
 - 💰 **Sell Chest** — drop items in, close the chest, get paid automatically
 - ✋ **Sell Hand / Sell All** — instant sell without opening any GUI
 - ⏪ **Sell Undo** — reverse your last sell within a time limit
-- 🧟 **SmartSpawner Integration** — buy real, correctly-tagged spawners
-- ✨ **AzCustomEnchant Integration** — buy real enchant books
 - 🔒 **Anti-Dupe** — menu item tagging + sweep on every interaction
 - 🔊 **Sounds & Logging** — configurable sounds, full transaction log
 - 🛠️ **In-Game Management** — add/remove items & categories without touching files
@@ -104,8 +102,7 @@ Forked from @VeoZax EconomeyGUI plugin (Thanks)
 | Tools | 20 |
 | Combat & Armor | 28 |
 | Miscellaneous | 20 |
-| Spawnerz | 44 (11 mobs × 4 tiers) |
-| Custom Enchants | 8 |
+
 
 ---
 
@@ -173,9 +170,6 @@ buy-slots:
 ## Known Limitations
 
 - On legacy MCPE 0.14.3/0.15.x clients, client-side prediction can briefly flash a tagged item in the hotbar before removal — expected and harmless
-- Spawnerz / Custom Enchants categories require their respective plugins installed
-- EconomyAPI required for all money features
-
 ---
 
 ## Documentation
