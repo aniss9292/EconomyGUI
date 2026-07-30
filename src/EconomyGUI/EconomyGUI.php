@@ -1355,6 +1355,17 @@ class EconomyGUI extends PluginBase implements Listener {
      */
     private function stripMenuItemsFromInventory(Player $player) {
         $inventory = $player->getInventory();
+
+        // On this fork, a player who gets force-closed (e.g. duplicate
+        // login kicking the old session with "is already Online!") can
+        // fire PlayerQuitEvent AFTER Player::close() has already torn
+        // down internal state, meaning getInventory() returns null here.
+        // Without this guard, getContents() on null crashes the event
+        // dispatch and cascades into every other plugin's quit handler.
+        if (is_null($inventory)) {
+            return 0;
+        }
+
         $removed = 0;
 
         foreach ($inventory->getContents() as $slot => $item) {

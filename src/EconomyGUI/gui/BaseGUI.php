@@ -57,6 +57,10 @@ abstract class BaseGUI extends CustomInventory {
     /** @var int Original block meta at the adjacent position (right chest half) */
     protected $origBlockMeta2 = 0;
 
+    /** @var int|null windowId captured at onOpen() time (tick 0), reused
+     * in finishOpen() 2 ticks later — see fix note in onOpen(). */
+    protected $capturedWindowId = null;
+
     abstract protected function getTitleKey();
 
     abstract protected function populateOnOpen(Player $who);
@@ -79,6 +83,20 @@ abstract class BaseGUI extends CustomInventory {
 
     public function onOpen(Player $who) {
         $this->viewers[spl_object_hash($who)] = $who;
+
+        // FIXED: هذا هو السبب الحقيقي وراء "الصندوق يظهر ويختفي، والـGUI
+        // تحاول تفتح ومابتفتحش". getWindowId() كان يتنادى جوا finishOpen()
+        // (بعد تأخير تيكين عبر OpenContainerTask)، مش هنا. لكن addWindow()
+        // فـEconomyGUI.php هو اللي كيسجل الـwindowId عند PocketMine، وهذا
+        // كيتصادف بالضبط فنفس التيك اللي onOpen() هاذي كتخدم فيه (تيك 0).
+        // بين تيك 0 وتيك 2 (وقت ما finishOpen() كتخدم)، أي حدث آخر
+        // (فتح/قفل نافذة أخرى لنفس اللاعب) ممكن يبدل أو يمسح الـwindowId
+        // المسجل عند PocketMine. النتيجة: finishOpen() كانت كتجيب windowId
+        // مختلف أو غير صالح وقت ما تبعت ContainerOpenPacket، فالكلاينت
+        // كيرفض الفتح فورًا لأن الـwindowid مايطابقش شي حاجة مسجلة عندو.
+        // الحل: نخزن الـwindowId هنا، فورًا بعد addWindow (تيك 0)، ونستعمل
+        // هاذي القيمة المحفوظة فـfinishOpen() بدل ما نطلبها من جديد.
+        $this->capturedWindowId = $who->getWindowId($this);
 
         $x = (int)$this->fakeHolder->x;
         $y = (int)$this->fakeHolder->y;
@@ -242,7 +260,12 @@ abstract class BaseGUI extends CustomInventory {
         }
 
         $openPk           = new ContainerOpenPacket();
-        $openPk->windowid = $who->getWindowId($this);
+        // FIXED: نستعمل capturedWindowId (اتسجل فـonOpen() تيك 0) بدل
+        // ما نطلب getWindowId() من جديد هنا (تيك 2) — شوف الشرح فـonOpen().
+        $windowId = $this->capturedWindowId !== null
+            ? $this->capturedWindowId
+            : $who->getWindowId($this); // fallback احتياطي
+        $openPk->windowid = $windowId;
         $openPk->type     = 0; // نفس قيمة CHEST — صريح، بدون الاعتماد على getNetworkType()
         $openPk->slots    = $this->getSize();
         $openPk->x        = $x;
@@ -292,12 +315,18 @@ abstract class BaseGUI extends CustomInventory {
         $who->dataPacket($blockPk2);
 
         $closePk           = new ContainerClosePacket();
-        $closePk->windowid = $who->getWindowId($this);
+        // FIXED: نفس السبب — نستعمل capturedWindowId عوض ما نطلب
+        // getWindowId() من جديد هنا، لأن PocketMine ممكن يكون بدّل/مسح
+        // تسجيل هاذ اللاعب للنافذة قبل ما onClose() توصل تتنفذ.
+        $closePk->windowid = $this->capturedWindowId !== null
+            ? $this->capturedWindowId
+            : $who->getWindowId($this);
         $who->dataPacket($closePk);
 
         unset($this->plugin->activeGUI[strtolower($who->getName())]);
 
         unset($this->viewers[spl_object_hash($who)]);
+        $this->capturedWindowId = null;
     }
 
     public function getOwnerPlayer() {

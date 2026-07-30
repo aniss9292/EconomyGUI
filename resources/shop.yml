@@ -168,6 +168,81 @@ categories:
       name: §r§eStained Clay
       price: 70
       amount: 1
+    - id: 159
+      meta: 1
+      name: §r§eOrange Stained Clay
+      price: 70
+      amount: 1
+    - id: 159
+      meta: 2
+      name: §r§eMagenta Stained Clay
+      price: 70
+      amount: 1
+    - id: 159
+      meta: 3
+      name: §r§eLight Blue Stained Clay
+      price: 70
+      amount: 1
+    - id: 159
+      meta: 4
+      name: §r§eYellow Stained Clay
+      price: 70
+      amount: 1
+    - id: 159
+      meta: 5
+      name: §r§eLime Stained Clay
+      price: 70
+      amount: 1
+    - id: 159
+      meta: 6
+      name: §r§ePink Stained Clay
+      price: 70
+      amount: 1
+    - id: 159
+      meta: 7
+      name: §r§eGray Stained Clay
+      price: 70
+      amount: 1
+    - id: 159
+      meta: 8
+      name: §r§eLight Gray Stained Clay
+      price: 70
+      amount: 1
+    - id: 159
+      meta: 9
+      name: §r§eCyan Stained Clay
+      price: 70
+      amount: 1
+    - id: 159
+      meta: 10
+      name: §r§ePurple Stained Clay
+      price: 70
+      amount: 1
+    - id: 159
+      meta: 11
+      name: §r§eBlue Stained Clay
+      price: 70
+      amount: 1
+    - id: 159
+      meta: 12
+      name: §r§eBrown Stained Clay
+      price: 70
+      amount: 1
+    - id: 159
+      meta: 13
+      name: §r§eGreen Stained Clay
+      price: 70
+      amount: 1
+    - id: 159
+      meta: 14
+      name: §r§eRed Stained Clay
+      price: 70
+      amount: 1
+    - id: 159
+      meta: 15
+      name: §r§eBlack Stained Clay
+      price: 70
+      amount: 1
     - id: 179
       meta: 0
       name: §r§eRed Sandstone
@@ -191,6 +266,81 @@ categories:
     - id: 35
       meta: 0
       name: §r§eWool
+      price: 35
+      amount: 1
+    - id: 35
+      meta: 1
+      name: §r§eOrange Wool
+      price: 35
+      amount: 1
+    - id: 35
+      meta: 2
+      name: §r§eMagenta Wool
+      price: 35
+      amount: 1
+    - id: 35
+      meta: 3
+      name: §r§eLight Blue Wool
+      price: 35
+      amount: 1
+    - id: 35
+      meta: 4
+      name: §r§eYellow Wool
+      price: 35
+      amount: 1
+    - id: 35
+      meta: 5
+      name: §r§eLime Wool
+      price: 35
+      amount: 1
+    - id: 35
+      meta: 6
+      name: §r§ePink Wool
+      price: 35
+      amount: 1
+    - id: 35
+      meta: 7
+      name: §r§eGray Wool
+      price: 35
+      amount: 1
+    - id: 35
+      meta: 8
+      name: §r§eLight Gray Wool
+      price: 35
+      amount: 1
+    - id: 35
+      meta: 9
+      name: §r§eCyan Wool
+      price: 35
+      amount: 1
+    - id: 35
+      meta: 10
+      name: §r§ePurple Wool
+      price: 35
+      amount: 1
+    - id: 35
+      meta: 11
+      name: §r§eBlue Wool
+      price: 35
+      amount: 1
+    - id: 35
+      meta: 12
+      name: §r§eBrown Wool
+      price: 35
+      amount: 1
+    - id: 35
+      meta: 13
+      name: §r§eGreen Wool
+      price: 35
+      amount: 1
+    - id: 35
+      meta: 14
+      name: §r§eRed Wool
+      price: 35
+      amount: 1
+    - id: 35
+      meta: 15
+      name: §r§eBlack Wool
       price: 35
       amount: 1
     - id: 170
@@ -890,6 +1040,81 @@ categories:
     - id: 171
       meta: 0
       name: §r§eCarpet
+      price: 25
+      amount: 1
+    - id: 171
+      meta: 1
+      name: §r§eOrange Carpet
+      price: 25
+      amount: 1
+    - id: 171
+      meta: 2
+      name: §r§eMagenta Carpet
+      price: 25
+      amount: 1
+    - id: 171
+      meta: 3
+      name: §r§eLight Blue Carpet
+      price: 25
+      amount: 1
+    - id: 171
+      meta: 4
+      name: §r§eYellow Carpet
+      price: 25
+      amount: 1
+    - id: 171
+      meta: 5
+      name: §r§eLime Carpet
+      price: 25
+      amount: 1
+    - id: 171
+      meta: 6
+      name: §r§ePink Carpet
+      price: 25
+      amount: 1
+    - id: 171
+      meta: 7
+      name: §r§eGray Carpet
+      price: 25
+      amount: 1
+    - id: 171
+      meta: 8
+      name: §r§eLight Gray Carpet
+      price: 25
+      amount: 1
+    - id: 171
+      meta: 9
+      name: §r§eCyan Carpet
+      price: 25
+      amount: 1
+    - id: 171
+      meta: 10
+      name: §r§ePurple Carpet
+      price: 25
+      amount: 1
+    - id: 171
+      meta: 11
+      name: §r§eBlue Carpet
+      price: 25
+      amount: 1
+    - id: 171
+      meta: 12
+      name: §r§eBrown Carpet
+      price: 25
+      amount: 1
+    - id: 171
+      meta: 13
+      name: §r§eGreen Carpet
+      price: 25
+      amount: 1
+    - id: 171
+      meta: 14
+      name: §r§eRed Carpet
+      price: 25
+      amount: 1
+    - id: 171
+      meta: 15
+      name: §r§eBlack Carpet
       price: 25
       amount: 1
     - id: 245
@@ -1856,6 +2081,13 @@ categories:
           amount: 1
           spawner_type: iron_golem
           spawner_tier: legendary
+        - id: 52
+          meta: 0
+          name: §dMythical Iron Golem Spawner
+          price: 10090000
+          amount: 1
+          spawner_type: iron_golem
+          spawner_tier: mythical
       skeleton:
         name: §r§bSkeleton Spawners
         icon: 52
@@ -1888,6 +2120,13 @@ categories:
           amount: 1
           spawner_type: skeleton
           spawner_tier: legendary
+        - id: 52
+          meta: 0
+          name: §dMythical Skeleton Spawner
+          price: 7350000
+          amount: 1
+          spawner_type: skeleton
+          spawner_tier: mythical
       zombie:
         name: §r§bZombie Spawners
         icon: 52
@@ -1920,6 +2159,13 @@ categories:
           amount: 1
           spawner_type: zombie
           spawner_tier: legendary
+        - id: 52
+          meta: 0
+          name: §dMythical Zombie Spawner
+          price: 7210000
+          amount: 1
+          spawner_type: zombie
+          spawner_tier: mythical
       creeper:
         name: §r§bCreeper Spawners
         icon: 52
@@ -1952,6 +2198,13 @@ categories:
           amount: 1
           spawner_type: creeper
           spawner_tier: legendary
+        - id: 52
+          meta: 0
+          name: §dMythical Creeper Spawner
+          price: 7420000
+          amount: 1
+          spawner_type: creeper
+          spawner_tier: mythical
       spider:
         name: §r§bSpider Spawners
         icon: 52
@@ -1984,6 +2237,13 @@ categories:
           amount: 1
           spawner_type: spider
           spawner_tier: legendary
+        - id: 52
+          meta: 0
+          name: §dMythical Spider Spawner
+          price: 7280000
+          amount: 1
+          spawner_type: spider
+          spawner_tier: mythical
       pig:
         name: §r§bPig Spawners
         icon: 52
@@ -2016,6 +2276,13 @@ categories:
           amount: 1
           spawner_type: pig
           spawner_tier: legendary
+        - id: 52
+          meta: 0
+          name: §dMythical Pig Spawner
+          price: 7070000
+          amount: 1
+          spawner_type: pig
+          spawner_tier: mythical
       cow:
         name: §r§bCow Spawners
         icon: 52
@@ -2048,6 +2315,13 @@ categories:
           amount: 1
           spawner_type: cow
           spawner_tier: legendary
+        - id: 52
+          meta: 0
+          name: §dMythical Cow Spawner
+          price: 7100000
+          amount: 1
+          spawner_type: cow
+          spawner_tier: mythical
       chicken:
         name: §r§bChicken Spawners
         icon: 52
@@ -2080,6 +2354,13 @@ categories:
           amount: 1
           spawner_type: chicken
           spawner_tier: legendary
+        - id: 52
+          meta: 0
+          name: §dMythical Chicken Spawner
+          price: 7060000
+          amount: 1
+          spawner_type: chicken
+          spawner_tier: mythical
       sheep:
         name: §r§bSheep Spawners
         icon: 52
@@ -2112,6 +2393,13 @@ categories:
           amount: 1
           spawner_type: sheep
           spawner_tier: legendary
+        - id: 52
+          meta: 0
+          name: §dMythical Sheep Spawner
+          price: 7080000
+          amount: 1
+          spawner_type: sheep
+          spawner_tier: mythical
       blaze:
         name: §r§bBlaze Spawners
         icon: 52
@@ -2144,6 +2432,13 @@ categories:
           amount: 1
           spawner_type: blaze
           spawner_tier: legendary
+        - id: 52
+          meta: 0
+          name: §dMythical Blaze Spawner
+          price: 8050000
+          amount: 1
+          spawner_type: blaze
+          spawner_tier: mythical
       witch:
         name: §r§bWitch Spawners
         icon: 52
@@ -2176,6 +2471,13 @@ categories:
           amount: 1
           spawner_type: witch
           spawner_tier: legendary
+        - id: 52
+          meta: 0
+          name: §dMythical Witch Spawner
+          price: 7840000
+          amount: 1
+          spawner_type: witch
+          spawner_tier: mythical
   custom_enchants:
     name: §r§dCustom Enchants
     icon: 403
