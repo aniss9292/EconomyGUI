@@ -20,10 +20,11 @@ class SellChestGUI extends BaseGUI {
     protected function populateOnOpen(Player $who) {
         // Empty chest - player puts items in
         // No navigation buttons needed for sell chest
-        // FIXED: حُذفت رسالة "sell-opened" بناءً على طلب المستخدم —
-        // كانت تظهر تلقائيًا عند فتح الصندوق ("Put items to sell,
-        // then close the chest"). صندوق البيع لا يعرض الآن أي رسالة
-        // عند الفتح؛ الرسالة الوحيدة هي ملخص الربح عند الإغلاق.
+        // FIXED: the "sell-opened" message was removed per user request —
+        // it used to show automatically when the chest was opened ("Put
+        // items to sell, then close the chest"). The sell chest no longer
+        // shows any message on open; the only message is the profit summary
+        // on close.
     }
 
     /**
@@ -31,11 +32,12 @@ class SellChestGUI extends BaseGUI {
      * Process all items: sell what's sellable, return what's not.
      */
     public function onClose(Player $who) {
-        // FIXED: نفس حارس عدم-التكرار المستخدم فـ BaseGUI::onClose(), لكن
-        // مطبّق هنا قبل processSellItems() تحديدًا، عشان ما يبيعش عناصر
-        // اللاعب مرتين أو يرسل رسالة "sell-no-items"/ملخص ربح مكرر لو
-        // onClose() انستدعت مرتين لنفس اللاعب (مثلاً استدعاء يدوي عبر
-        // removeWindow() متبوع بـ onInventoryClose() التلقائي من الكلاينت).
+        // FIXED: same idempotency guard used in BaseGUI::onClose(), but
+        // applied here specifically before processSellItems(), so it
+        // doesn't sell the player's items twice or send a duplicate
+        // "sell-no-items"/profit summary message if onClose() gets called
+        // twice for the same player (e.g. a manual call via removeWindow()
+        // followed by the client's automatic onInventoryClose()).
         if (!isset($this->viewers[spl_object_hash($who)])) {
             return;
         }
@@ -119,10 +121,11 @@ class SellChestGUI extends BaseGUI {
                 "time"  => time(),
             ));
 
-            // FIXED: استُبدل sendTip بـ sendMessage بناءً على طلب
-            // المستخدم — sendTip تظهر فوق الشاشة (action bar) لثانية
-            // واحدة فقط ثم تختفي بسرعة، فقد لا تُلاحظ بوضوح. الآن
-            // ملخص الربح يظهر برسالة دائمة في الشات عند إغلاق الصندوق.
+            // FIXED: sendTip was replaced with sendMessage per user request
+            // — sendTip appears above the screen (action bar) for just one
+            // second then disappears quickly, so it might not be clearly
+            // noticed. Now the profit summary appears as a permanent chat
+            // message when the chest is closed.
             $player->sendMessage(
                 $cfg->getMessage("sell-chest-success", array(
                     "amount" => $soldCount,

@@ -3,12 +3,14 @@
 /*
  * Delayed container-open task for double-chest GUIs.
  *
- * v1.3.2: هاذ الآلية رجعت بعد ما تبين تجريبيًا أن الكلاينت (MCPE
- * 0.14.3/0.15.x) يحتاج فعليًا فرصة زمنية (كذا تيك) باش يستوعب حزم
- * تحديث البلوك (UpdateBlockPacket × 2) والـNBT (BlockEntityDataPacket
- * × 2) قبل ما يقبل يفتح الحاوية (ContainerOpenPacket). بلا هاذ
- * التأخير، الكلاينت كيرفض الفتح فورًا (الصندوق يبان فوق راس اللاعب
- * ويختفي، الـGUI يبان ويختفي بسرعة) حتى لو السيرفر رسل كل الحزم بنجاح.
+ * v1.3.2: this mechanism came back after it was shown experimentally
+ * that the client (MCPE 0.14.3/0.15.x) actually needs some time (a few
+ * ticks) to process the block update packets (UpdateBlockPacket × 2)
+ * and NBT (BlockEntityDataPacket × 2) before it accepts opening the
+ * container (ContainerOpenPacket). Without this delay, the client
+ * rejects the open immediately (the chest appears above the player's
+ * head and disappears, the GUI appears and disappears quickly) even
+ * though the server sent all packets successfully.
  */
 
 namespace EconomyGUI\gui;

@@ -59,13 +59,13 @@ class EconomyGUI extends PluginBase implements Listener {
             $this->getLogger()->warning("EconomyAPI not found! Please Install it first");
         }
 
-        // SmartSpawner اختياري: إذا كان موجوداً، يصبح بإمكاننا منح
-        // عناصر المولّدات الحقيقية (بـ NBT الصحيح) من فئة "spawnerz".
+        // SmartSpawner is optional: if present, we can grant
+        // real spawner items (with correct NBT) for the "spawnerz" category.
         $this->smartSpawner = $this->getServer()->getPluginManager()->getPlugin("SmartSpawner");
 
-        // AzCustomEnchant اختياري بنفس الطريقة: نتحقق من وجوده هنا مرة
-        // وحدة عند التشغيل، ونستعمل النتيجة لاحقاً لإخفاء فئة
-        // "custom_enchants" من شاشة الكاتيغوريز إذا كان غير مفعّل.
+        // AzCustomEnchant is optional the same way: we check for it once
+        // at startup, and use the result later to hide the
+        // "custom_enchants" category from the categories screen if it's not enabled.
         $this->azCustomEnchant = $this->getServer()->getPluginManager()->getPlugin("AzCustomEnchant");
 
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
@@ -492,22 +492,26 @@ class EconomyGUI extends PluginBase implements Listener {
     public function openShop(Player $player) {
         $name = strtolower($player->getName());
 
-        // FIXED: إذا عند اللاعب نافذة EconomyGUI قديمة لسع مسجّلة (مثلاً
-        // فتح /shop أو /sell بسرعة بعد إغلاق نافذة سابقة)، نسكرها صريحاً
-        // الآن (removeWindow يستدعي onClose() فوراً ويكمّلها بالكامل: بيع
-        // العناصر، إرجاع البلوك الأصلي، إرسال ContainerClosePacket) قبل
-        // نبدأ فتح النافذة الجديدة. بدون هذا، PocketMine يسكر القديمة
-        // تلقائيًا فاللحظة اللي نستدعي addWindow، وهذا يخلق تضارب تايمنق
-        // مع فتح النافذة الجديدة — الكلاينت يستقبل Open(جديد) وClose(قديم
-        // تلقائي) قريبين من بعض فيقرر يسكر هو بنفسه.
+        // FIXED: if the player still has an old EconomyGUI window registered
+        // (e.g. opening /shop or /sell quickly after closing a previous
+        // window), close it explicitly now (removeWindow calls onClose()
+        // immediately and completes it fully: selling items, restoring the
+        // original block, sending ContainerClosePacket) before we start
+        // opening the new window. Without this, PocketMine closes the old
+        // one automatically the moment we call addWindow, which creates a
+        // timing conflict with opening the new window — the client receives
+        // Open(new) and Close(old-automatic) close together and decides to
+        // close itself.
         //
-        // v1.3.1: آلية OpenContainerTask المؤجلة (تيك واحد) اللي كانت
-        // مذكورة هنا سابقًا اتحذفت بالكامل من BaseGUI::onOpen() — كانت
-        // هي بالضبط سبب مشكلة "/sell يفتح نص ثانية ثم يسكر وحدو": كانت
-        // تخلق فجوة زمنية بين addWindow() (تسجيل الـGUI كمفتوحة فورًا)
-        // وبين وصول ContainerOpenPacket الحقيقي للكلاينت (بعد تيك كامل)،
-        // وأي حدث يجي فهاذ التيك كان يلغي الفتح بصمت. الحماية اللي تحت
-        // (إغلاق أي GUI قديمة قبل فتح الجديدة) تبقى مفيدة وصحيحة برأسها.
+        // v1.3.1: the deferred OpenContainerTask mechanism (one tick) that
+        // used to be mentioned here was fully removed from BaseGUI::onOpen()
+        // — it was exactly the cause of the "/sell opens for half a second
+        // then closes itself" bug: it created a timing gap between
+        // addWindow() (registering the GUI as open immediately) and the
+        // real ContainerOpenPacket reaching the client (after a full tick),
+        // and any event arriving during that tick would silently cancel the
+        // open. The guard below (closing any old GUI before opening the new
+        // one) remains useful and correct on its own.
         if (isset($this->activeGUI[$name])) {
             $oldGui = $this->activeGUI[$name];
             unset($this->activeGUI[$name]);
@@ -539,8 +543,9 @@ class EconomyGUI extends PluginBase implements Listener {
 
         $name = strtolower($player->getName());
 
-        // FIXED: نفس تصحيح openShop() — نسكر أي نافذة EconomyGUI قديمة
-        // صريحاً قبل الفتح الجديد، لمنع تضارب التايمنق مع الإغلاق التلقائي.
+        // FIXED: same fix as openShop() — explicitly close any old
+        // EconomyGUI window before the new open, to prevent a timing
+        // conflict with the automatic close.
         if (isset($this->activeGUI[$name])) {
             $oldGui = $this->activeGUI[$name];
             unset($this->activeGUI[$name]);
@@ -559,18 +564,21 @@ class EconomyGUI extends PluginBase implements Listener {
     public function openSellChest(Player $player) {
         $name = strtolower($player->getName());
 
-        // FIXED: نفس تصحيح openShop() — نسكر أي نافذة EconomyGUI قديمة
-        // صريحاً (ونكمّل onClose بالكامل: بيع، إرجاع بلوك، إغلاق حزمة)
-        // قبل نبدأ تسلسل فتح النافذة الجديدة، بدل نخلي PocketMine يسكرها
-        // تلقائياً بطريقة قد تتضارب زمنياً مع فتح النافذة الجديدة.
+        // FIXED: same fix as openShop() — explicitly close any old
+        // EconomyGUI window (and fully complete onClose: selling, block
+        // restore, closing the packet) before we start the sequence of
+        // opening the new window, instead of letting PocketMine close it
+        // automatically in a way that could conflict timing-wise with
+        // opening the new window.
         //
-        // v1.3.1: السبب الفعلي لمشكلة "/sell يفتح نص ثانية ثم يسكر
-        // وحدو" ماكانش هنا — كان فـ BaseGUI::onOpen() اللي كان يأخر فتح
-        // الحاوية الحقيقية (ContainerOpenPacket) بتيك كامل عبر
-        // OpenContainerTask، بينما addWindow() كان يسجل الـGUI كمفتوحة
-        // فورًا. تلك الآلية المؤجلة اتحذفت بالكامل؛ الفتح دلوقتي متزامن
-        // (نفس التيك) زي ما كان فـ النسخة القديمة المستقرة. الحماية اللي
-        // تحت (إغلاق GUI قديمة قبل فتح الجديدة) تبقى صحيحة ومفيدة برأسها.
+        // v1.3.1: the actual cause of the "/sell opens for half a second
+        // then closes itself" bug wasn't here — it was in BaseGUI::onOpen(),
+        // which used to delay the real container open (ContainerOpenPacket)
+        // by a full tick via OpenContainerTask, while addWindow() registered
+        // the GUI as open immediately. That deferred mechanism was fully
+        // removed; the open is now synchronous (same tick) as it was in the
+        // old stable version. The guard below (closing the old GUI before
+        // opening the new one) remains correct and useful on its own.
         if (isset($this->activeGUI[$name])) {
             $oldGui = $this->activeGUI[$name];
             unset($this->activeGUI[$name]);
@@ -603,9 +611,10 @@ class EconomyGUI extends PluginBase implements Listener {
         $allCats = array();
         foreach ($categories as $key => $cat) {
             if (!isset($cat["icon"], $cat["name"])) continue;
-            // إخفاء الفئات المرتبطة بـ plugin غير متوفر (SmartSpawner
-            // لفئة spawnerz، AzCustomEnchant لفئة custom_enchants) بدل
-            // عرضها وفشل الشراء لاحقاً.
+            // Hide categories tied to a plugin that isn't available
+            // (SmartSpawner for the spawnerz category, AzCustomEnchant for
+            // custom_enchants) instead of showing them and having the
+            // purchase fail later.
             if ($this->isCategoryHiddenByMissingDependency($cat)) continue;
             $allCats[] = $cat;
         }
@@ -640,15 +649,16 @@ class EconomyGUI extends PluginBase implements Listener {
         // Place navigation buttons
         $inv->placeNavigationButtons($totalPages);
 
-        // FIXED: على كلاينتات MCPE 0.14.3/0.15.x، تغيير الكاتيغوري كان
-        // يعتمد فقط على setItem() الفردي لكل سلوت (~45+ حزمة منفصلة في
-        // نفس التيك: clearAllSlots يرسل AIR لكل سلوت، ثم التعبية ترسل
-        // العنصر الجديد). الكلاينت القديم يفقد/يخلط بعض هذي الحزم
-        // فتظهر بقايا من الكاتيغوري السابقة مختلطة مع الجديدة (هذا
-        // اللي شفته بصور Redstone/Food/Misc). الحل: resync كامل واحد
-        // (ContainerSetContentPacket) بعد كل تعبية، يضمن أن الكلاينت
-        // يستلم الحالة النهائية الصحيحة دفعة واحدة بدل الاعتماد على
-        // تتابع حزم فردية قابلة للفقد.
+        // FIXED: on MCPE 0.14.3/0.15.x clients, changing category used to
+        // rely solely on individual setItem() calls per slot (~45+ separate
+        // packets in the same tick: clearAllSlots sends AIR for every slot,
+        // then filling sends the new item). The old client loses/mixes up
+        // some of these packets, so leftover items from the previous
+        // category appear mixed with the new one (this is what you saw in
+        // the Redstone/Food/Misc screenshots). Fix: one full resync
+        // (ContainerSetContentPacket) after each fill ensures the client
+        // receives the final correct state in one shot instead of relying
+        // on a sequence of individual packets that can be dropped.
         $who = $inv->getOwnerPlayer();
         if ($who instanceof Player && $who->isOnline()) {
             $inv->sendContents($who);
@@ -708,8 +718,8 @@ class EconomyGUI extends PluginBase implements Listener {
 
         $inv->placeNavigationButtons($totalPages);
 
-        // FIXED: نفس تصحيح fillShopCategories() — resync كامل بعد
-        // التعبية يمنع بقايا السلوتات على الكلاينتات القديمة.
+        // FIXED: same fix as fillShopCategories() — a full resync after
+        // filling prevents leftover slots on old clients.
         $who = $inv->getOwnerPlayer();
         if ($who instanceof Player && $who->isOnline()) {
             $inv->sendContents($who);
@@ -769,10 +779,10 @@ class EconomyGUI extends PluginBase implements Listener {
         // Place navigation buttons
         $inv->placeNavigationButtons($totalPages);
 
-        // FIXED: نفس تصحيح fillShopCategories() — هذي الدالة هي اللي
-        // تعرض عناصر Redstone/Food/Miscellaneous (وكل الكاتيغوريز
-        // الأخرى) فالصور المرسلة، resync كامل بعد التعبية يمنع بقايا
-        // السلوتات من الكاتيغوري السابقة على الكلاينتات القديمة.
+        // FIXED: same fix as fillShopCategories() — this is the function
+        // that displays Redstone/Food/Miscellaneous items (and every other
+        // category) in the screenshots sent; a full resync after filling
+        // prevents leftover slots from the previous category on old clients.
         $who = $inv->getOwnerPlayer();
         if ($who instanceof Player && $who->isOnline()) {
             $inv->sendContents($who);
@@ -842,9 +852,9 @@ class EconomyGUI extends PluginBase implements Listener {
         }
 
         // Filler for the empty middle rows (18-44) and the navigation
-        // row (45-53). FIXED: نفس تصحيح BaseGUI.php — استُبدل "Stained
-        // Glass Pane" (id:160, غير مدعوم في 0.14.3/0.15.x) بـ "Glass
-        // Pane" العادي (id:102).
+        // row (45-53). FIXED: same fix as BaseGUI.php — replaced "Stained
+        // Glass Pane" (id:160, not supported in 0.14.3/0.15.x) with regular
+        // "Glass Pane" (id:102).
         $filler = $this->markAsMenuItem(Item::get(102, 0, 1));
         $this->setItemDisplay($filler, "§r");
         for ($i = 18; $i <= 53; $i++) {
@@ -852,9 +862,9 @@ class EconomyGUI extends PluginBase implements Listener {
         }
         $inv->setItem(45, $inv->makeBackButton());
 
-        // FIXED: نفس تصحيح fillShopCategories()/fillShopCategoryItems()
-        // — resync كامل بعد التعبية يمنع بقايا السلوتات على الكلاينتات
-        // القديمة عند فتح شاشة الشراء.
+        // FIXED: same fix as fillShopCategories()/fillShopCategoryItems()
+        // — a full resync after filling prevents leftover slots on old
+        // clients when opening the purchase screen.
         $who = $inv->getOwnerPlayer();
         if ($who instanceof Player && $who->isOnline()) {
             $inv->sendContents($who);
@@ -1165,9 +1175,9 @@ class EconomyGUI extends PluginBase implements Listener {
             foreach ($this->configManager->getShopCategories() as $catKey => $cat) {
                 if (!isset($cat["name"]) || $itemName !== $cat["name"]) continue;
 
-                // دفاعياً: نفس فحص الإخفاء المستعمل في fillShopCategories() -
-                // حتى لو وصل كليك بطريقة ما لفئة مخفية (plugin غير متوفر)،
-                // ما نخليهوش يدخلها.
+                // Defensively: same hide-check used in fillShopCategories() -
+                // even if a click somehow reaches a hidden category (plugin
+                // not available), we don't let it in.
                 if ($this->isCategoryHiddenByMissingDependency($cat)) continue;
 
                 // "spawnerz" category has mob sub-categories instead of a flat
@@ -1394,8 +1404,9 @@ class EconomyGUI extends PluginBase implements Listener {
     private function buildShopItemLore(array $entry) {
         $sym = $this->configManager->getSymbol();
 
-        // عناصر مولّدات SmartSpawner: نعرض النوع/الدرجة بدل وصف عنصر عادي،
-        // لأن id:meta وحدهما (52:0) لا يميزان بين المولدات.
+        // SmartSpawner spawner items: we show the type/tier instead of a
+        // regular item description, because id:meta alone (52:0) doesn't
+        // distinguish between spawners.
         if (isset($entry["spawner_type"], $entry["spawner_tier"])) {
             $lore = $entry["name"] . "\n§7Tier: §f" . $entry["spawner_tier"]
                   . "\n§aPrice: §e" . $sym . number_format((int)$entry["price"]);
@@ -1468,7 +1479,7 @@ class EconomyGUI extends PluginBase implements Listener {
         if ($isSpawner) {
             $spawnerPlugin = $this->smartSpawner;
             if ($spawnerPlugin === null) {
-                // SmartSpawner غير مفعّل/غير موجود — لا يمكن منح مولّد حقيقي
+                // SmartSpawner is not enabled/not present — can't grant a real spawner
                 $player->sendPopup("§cSmartSpawner plugin is not available.");
                 $this->playTickSound($player, "error");
                 return;

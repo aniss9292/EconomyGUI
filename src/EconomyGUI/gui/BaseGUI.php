@@ -84,18 +84,21 @@ abstract class BaseGUI extends CustomInventory {
     public function onOpen(Player $who) {
         $this->viewers[spl_object_hash($who)] = $who;
 
-        // FIXED: هذا هو السبب الحقيقي وراء "الصندوق يظهر ويختفي، والـGUI
-        // تحاول تفتح ومابتفتحش". getWindowId() كان يتنادى جوا finishOpen()
-        // (بعد تأخير تيكين عبر OpenContainerTask)، مش هنا. لكن addWindow()
-        // فـEconomyGUI.php هو اللي كيسجل الـwindowId عند PocketMine، وهذا
-        // كيتصادف بالضبط فنفس التيك اللي onOpen() هاذي كتخدم فيه (تيك 0).
-        // بين تيك 0 وتيك 2 (وقت ما finishOpen() كتخدم)، أي حدث آخر
-        // (فتح/قفل نافذة أخرى لنفس اللاعب) ممكن يبدل أو يمسح الـwindowId
-        // المسجل عند PocketMine. النتيجة: finishOpen() كانت كتجيب windowId
-        // مختلف أو غير صالح وقت ما تبعت ContainerOpenPacket، فالكلاينت
-        // كيرفض الفتح فورًا لأن الـwindowid مايطابقش شي حاجة مسجلة عندو.
-        // الحل: نخزن الـwindowId هنا، فورًا بعد addWindow (تيك 0)، ونستعمل
-        // هاذي القيمة المحفوظة فـfinishOpen() بدل ما نطلبها من جديد.
+        // FIXED: this is the real cause behind "the chest appears and
+        // disappears, and the GUI tries to open but doesn't". getWindowId()
+        // used to be called inside finishOpen() (after a two-tick delay via
+        // OpenContainerTask), not here. But addWindow() in EconomyGUI.php is
+        // what registers the windowId with PocketMine, and this happens to
+        // occur in the exact same tick that this onOpen() runs in (tick 0).
+        // Between tick 0 and tick 2 (when finishOpen() runs), any other
+        // event (opening/closing another window for the same player) could
+        // change or clear the windowId registered with PocketMine. The
+        // result: finishOpen() would fetch a different or invalid windowId
+        // when it sent ContainerOpenPacket, so the client would reject the
+        // open immediately because the windowId didn't match anything it
+        // had registered. Fix: we store the windowId here, immediately
+        // after addWindow (tick 0), and use this saved value in
+        // finishOpen() instead of requesting it again.
         $this->capturedWindowId = $who->getWindowId($this);
 
         $x = (int)$this->fakeHolder->x;
@@ -104,31 +107,35 @@ abstract class BaseGUI extends CustomInventory {
         $x2 = $x + 1; // adjacent slot for the second half of the double chest
 
         // Save original blocks BEFORE placing fake chests (both halves).
-        // هاذي القيمة الحقيقية لأي بلوك كان موجود قبل (حجر، تراب، هواء،
-        // أي حاجة) — بترجع بالضبط كيفما هي فـ onClose() تحت، بلا تغيير.
+        // This is the real value of whatever block was there before (stone,
+        // dirt, air, anything) — it's restored exactly as-is in onClose()
+        // below, unchanged.
         $this->origBlockId    = $who->getLevel()->getBlockIdAt($x, $y, $z);
         $this->origBlockMeta  = $who->getLevel()->getBlockDataAt($x, $y, $z);
         $this->origBlockId2   = $who->getLevel()->getBlockIdAt($x2, $y, $z);
         $this->origBlockMeta2 = $who->getLevel()->getBlockDataAt($x2, $y, $z);
 
-        // v1.3.3: FIXED — السبب الحقيقي لمشكلة "يخدم أول مرة، ماخدمش
-        // ثاني مرة فنفس المكان بالضبط، حتى نبدل وضعية": الكلاينت (MCPE
-        // legacy) ما كيبعتش طلب فتح الحاوية إلا إذا "حس" بتغيير فعلي
-        // فالبلوك. أول مرة، البلوك الأصلي (مثلاً هواء أو حجر) يتبدل
-        // لـChest — تغيير واضح، الكلاينت كيفتح عادي. لكن onClose() كان
-        // يرجّع البلوك لحالته الأصلية (client-side فقط)، وبعض كلاينتات
-        // legacy كتبقى مخزنة فكاش محلي إنو ذاك المكان "كان Chest" —
-        // فلما نرجع نبعث Chest بنفس facing من جديد (onOpen() الثانية)،
-        // الكلاينت ما يشوفش فرق حقيقي (Chest → Chest) ومايبعتش طلب فتح.
+        // v1.3.3: FIXED — the real cause of "works the first time, doesn't
+        // work the second time in the exact same spot, until we change
+        // position": the client (legacy MCPE) doesn't send a container-open
+        // request unless it "feels" an actual block change. The first time,
+        // the original block (e.g. air or stone) changes to a Chest — a
+        // clear change, the client opens normally. But onClose() would
+        // restore the block to its original state (client-side only), and
+        // some legacy clients keep a local cache that that spot "was a
+        // Chest" — so when we send a Chest again with the same facing
+        // (second onOpen()), the client sees no real difference
+        // (Chest → Chest) and doesn't send an open request.
         //
-        // الحل: نبعث الهواء (Air) أولاً بشكل صريح قبل Chest، فكل نصف.
-        // هاذ التسلسل (Air ثم Chest) كيجبر الكلاينت يسجل "بلوك جديد
-        // اتحط اللحظة" فكل مرة، بغض النظر شنو كانت الحالة المخزنة عندو
-        // من قبل. هاذ الخطوة ماشي جزء من استرجاع البلوك الأصلي — هي
-        // فقط لحظة وسيطة عابرة (transient) قبل ما نحط Chest الحقيقي.
-        // البلوك الأصلي الحقيقي (لو كان حجر مثلاً) يبقى محفوظ فـ
-        // origBlockId/origBlockId2 ويرجع صحيح 100% فـ onClose() تحت،
-        // مهما كان نوعه — هاذ التسلسل لا يمسه ولا يبدله.
+        // Fix: we explicitly send Air first before Chest, for each half.
+        // This sequence (Air then Chest) forces the client to register "a
+        // new block was just placed" every time, regardless of what state
+        // it had cached before. This step isn't part of restoring the
+        // original block — it's just a brief transient moment before we
+        // place the real Chest. The actual original block (say, stone) stays
+        // saved in origBlockId/origBlockId2 and is restored correctly 100%
+        // in onClose() below, whatever its type — this sequence doesn't
+        // touch or change it.
         $airPk          = new UpdateBlockPacket();
         $airPk->x       = $x;
         $airPk->z       = $z;
@@ -148,12 +155,13 @@ abstract class BaseGUI extends CustomInventory {
         $who->dataPacket($airPk2);
 
         // Place chest block (client-side only, flags = 0) - left half
-        // FIXED: blockData كانت 0 — هذي قيمة facing غير صالحة لصندوق
-        // Chest (القيم الصحيحة 2=شمال, 3=جنوب, 4=غرب, 5=شرق). facing
-        // غير صالح يخلي الكلاينت يرفض ربط البلوكين كصندوق مزدوج (يبقى
-        // فيه فجوة بصرية) وقد يرفض حتى فتح الـGUI بالكامل. نستخدم 2
-        // (شمال) ثابتة لكل الحالات — كلا البلوكين بنفس الـfacing.
-        $facing = 2; // شمال، ثابتة للبلوكين التوأم
+        // FIXED: blockData used to be 0 — this is an invalid facing value
+        // for a Chest block (valid values are 2=north, 3=south, 4=west,
+        // 5=east). An invalid facing makes the client refuse to link the
+        // two blocks as a double chest (leaving a visual gap) and might
+        // even refuse to open the GUI entirely. We use a fixed 2 (north)
+        // for all cases — both blocks share the same facing.
+        $facing = 2; // north, fixed for the twin blocks
         $blockPk          = new UpdateBlockPacket();
         $blockPk->x       = $x;
         $blockPk->z       = $z;
@@ -179,10 +187,10 @@ abstract class BaseGUI extends CustomInventory {
         // Send tile entity data with custom title for BOTH halves so the
         // client links them into a single double-chest container instead
         // of two separate single chests.
-        // FIXED: أُضيفت pairx/pairy/pairz — هذي الطريقة الرسمية لربط
-        // نصفي صندوق مزدوج فـ NBT الخاص بـ Chest (كل نصف يشير لموقع
-        // النصف الآخر). بدونها الكلاينت قد يرسم كل صندوق منفصلاً رغم
-        // تطابق الـfacing والتجاور.
+        // FIXED: added pairx/pairy/pairz — this is the official way to link
+        // the two halves of a double chest in Chest NBT (each half points
+        // to the other half's location). Without it the client might render
+        // each chest separately despite matching facing and adjacency.
         $title = (string)$this->plugin->cfg()->get($this->getTitleKey(), "Shop");
 
         $nbtData = new CompoundTag("", array(
@@ -227,22 +235,28 @@ abstract class BaseGUI extends CustomInventory {
         $nbtPk2->namedtag = $nbt2->write();
         $who->dataPacket($nbtPk2);
 
-        // v1.3.2: رجعنا لآلية التأخير (delayed open) بعد ما تبين تجريبيًا
-        // إنها ضرورية فعليًا لهاذ الكلاينت (MCPE 0.14.3/0.15.x) — بلاها
-        // الكلاينت كيرفض قبول فتح الحاوية أصلاً (الصندوق يبان فوق راس
-        // اللاعب فجأة ويختفي، والـGUI يبان ويختفي بسرعة)، رغم أن السيرفر
-        // كيرسل الحزم بنجاح 100% (تأكدنا من الكونسول: onOpen() تتنفذ
-        // بلا أي خطأ). التزامن الفوري (نفس التيك) اللي جربناه فـ v1.3.1
-        // ماكانش كافي لهاذ الكلاينت يستوعب البلوكين قبل يقبل الفتح.
+        // v1.3.2: we went back to the delayed-open mechanism after it was
+        // shown experimentally that it's genuinely necessary for this
+        // client (MCPE 0.14.3/0.15.x) — without it the client refuses to
+        // accept the container open at all (the chest appears above the
+        // player's head suddenly and disappears, the GUI appears and
+        // disappears quickly), even though the server sends all packets
+        // successfully 100% (confirmed via console: onOpen() runs without
+        // any error). The immediate sync (same tick) we tried in v1.3.1
+        // wasn't enough for this client to process the two blocks before
+        // accepting the open.
         //
-        // زدنا التأخير لـ 2 تيكات (كان تيك واحد) عشان نعطي الكلاينت وقت
-        // أكبر يعالج البلوكين + الـNBT قبل يوصل طلب فتح الحاوية.
+        // We increased the delay to 2 ticks (was one tick) to give the
+        // client more time to process the blocks + NBT before the
+        // container-open request arrives.
         //
-        // المشكلة الأصلية ("/sell يفتح نص ثانية ثم يسكر وحدو") ماكانتش
-        // بسبب وجود التأخير بحد ذاته، بل بسبب غياب حماية عند onClose():
-        // لو onClose() تنستدعى مرتين (تلقائي + يدوي) خلال فترة الانتظار،
-        // كان يسوي تكرار. هاذ الحماية (idempotency guard) موجودة دابا فـ
-        // onClose() تحت — فهي كافية بحالها بلا حاجة نلغي التأخير نفسه.
+        // The original bug ("/sell opens for half a second then closes
+        // itself") wasn't caused by the delay itself, but by the lack of a
+        // guard in onClose(): if onClose() got called twice (automatic +
+        // manual) during the waiting period, it would cause a duplicate.
+        // This guard (idempotency guard) now exists in onClose() below — so
+        // it's sufficient on its own without needing to remove the delay
+        // itself.
         $this->plugin->getServer()->getScheduler()->scheduleDelayedTask(
             new OpenContainerTask($this, $who, $x, $y, $z),
             2
@@ -260,13 +274,14 @@ abstract class BaseGUI extends CustomInventory {
         }
 
         $openPk           = new ContainerOpenPacket();
-        // FIXED: نستعمل capturedWindowId (اتسجل فـonOpen() تيك 0) بدل
-        // ما نطلب getWindowId() من جديد هنا (تيك 2) — شوف الشرح فـonOpen().
+        // FIXED: we use capturedWindowId (registered in onOpen() tick 0)
+        // instead of requesting getWindowId() again here (tick 2) — see the
+        // explanation in onOpen().
         $windowId = $this->capturedWindowId !== null
             ? $this->capturedWindowId
-            : $who->getWindowId($this); // fallback احتياطي
+            : $who->getWindowId($this); // safety fallback
         $openPk->windowid = $windowId;
-        $openPk->type     = 0; // نفس قيمة CHEST — صريح، بدون الاعتماد على getNetworkType()
+        $openPk->type     = 0; // same value as CHEST — explicit, without relying on getNetworkType()
         $openPk->slots    = $this->getSize();
         $openPk->x        = $x;
         $openPk->y        = $y;
@@ -278,13 +293,15 @@ abstract class BaseGUI extends CustomInventory {
     }
 
     public function onClose(Player $who) {
-        // FIXED: حارس عدم-التكرار (idempotency guard). onClose() ممكن
-        // تنستدعى من مسارين — تلقائيًا من onInventoryClose() فور إغلاق
-        // اللاعب للـGUI من جهازه، أو صراحة من كود يستدعي removeWindow().
-        // لو استُدعي مرتين لنفس اللاعب، لازم ثاني استدعاء ما يسوي شيء —
-        // غير كذا راح يرسل بلوكات/حزمة إغلاق مكررة ممكن تتعارض زمنيًا مع
-        // فتح النافذة التالية. isset($viewers) هو مصدر الحقيقة: أول
-        // استدعاء يمسحه، فأي استدعاء بعده يرجع فورًا.
+        // FIXED: idempotency guard. onClose() can be called from two paths
+        // — automatically from onInventoryClose() as soon as the player
+        // closes the GUI on their device, or explicitly from code that
+        // calls removeWindow(). If it's called twice for the same player,
+        // the second call must do nothing — otherwise it will send
+        // duplicate blocks/close packets that could conflict timing-wise
+        // with opening the next window. isset($viewers) is the source of
+        // truth: the first call clears it, so any call after that returns
+        // immediately.
         if (!isset($this->viewers[spl_object_hash($who)])) {
             return;
         }
@@ -315,9 +332,10 @@ abstract class BaseGUI extends CustomInventory {
         $who->dataPacket($blockPk2);
 
         $closePk           = new ContainerClosePacket();
-        // FIXED: نفس السبب — نستعمل capturedWindowId عوض ما نطلب
-        // getWindowId() من جديد هنا، لأن PocketMine ممكن يكون بدّل/مسح
-        // تسجيل هاذ اللاعب للنافذة قبل ما onClose() توصل تتنفذ.
+        // FIXED: same reason — we use capturedWindowId instead of
+        // requesting getWindowId() again here, because PocketMine might
+        // have changed/cleared this player's window registration before
+        // onClose() gets to run.
         $closePk->windowid = $this->capturedWindowId !== null
             ? $this->capturedWindowId
             : $who->getWindowId($this);
@@ -496,12 +514,13 @@ abstract class BaseGUI extends CustomInventory {
         $currentPage = $this->currentPage;
 
         // Fill navigation row with glass pane filler
-        // FIXED: كان "Stained Glass Pane" (id:160) — هذا البلوك غير
-        // مسجل/غير مدعوم في MCPE 0.14.3/0.15.x (أُضيف رسميًا في
-        // إصدارات لاحقة)، فكان يظهر كزجاج أبيض/مكسور بصريًا بدل
-        // الزجاج الأسود المقصود. استُبدل بـ "Glass Pane" العادي
-        // (id:102) المتوفر فعليًا في هذي النسخ.
-        $filler = $this->plugin->markAsMenuItem(Item::get(102, 0, 1)); // Glass pane (عادي، متوافق مع 0.14.3/0.15.x)
+        // FIXED: used to be "Stained Glass Pane" (id:160) — this block
+        // isn't registered/supported in MCPE 0.14.3/0.15.x (officially
+        // added in later versions), so it appeared as broken/white glass
+        // visually instead of the intended black glass. Replaced with
+        // regular "Glass Pane" (id:102) which is actually available in
+        // these versions.
+        $filler = $this->plugin->markAsMenuItem(Item::get(102, 0, 1)); // Glass pane (regular, compatible with 0.14.3/0.15.x)
         $this->plugin->setItemDisplay($filler, "§r");
         for ($i = 45; $i <= 53; $i++) {
             $this->setItem($i, $filler);

@@ -95,9 +95,9 @@ class ConfigManager {
         );
         if ($sellPrice !== null) $entry["sell"] = (int)$sellPrice;
 
-        // اختياري: تمييز خاص بمولّدات SmartSpawner (نفس id:meta=52:0
-        // لكل المولدات، فالتمييز الحقيقي بين الأنواع/الدرجات يتم عبر
-        // هذين الحقلين بدل id/meta).
+        // Optional: special identifier for SmartSpawner spawners (all
+        // spawners share id:meta=52:0, so the real distinction between
+        // types/tiers is done via these two fields instead of id/meta).
         if ($spawnerType !== null) $entry["spawner_type"] = (string)$spawnerType;
         if ($spawnerTier !== null) $entry["spawner_tier"] = (string)$spawnerTier;
 
